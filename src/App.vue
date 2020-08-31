@@ -32,10 +32,26 @@
       <template>
         <v-subheader>Theme Color</v-subheader>
         <v-row class="mx-1">
-          <v-col class="mx-1" style="width: 35px" v-for="color in colors" :key="color + Date.now()">
+          <v-col class="mx-1" style="width: 35px" v-for="color in colors" :key="color.name">
             <v-btn fab elevation="0" x-small :color="color.value" @click="changeThemeColor(color)">
               <v-icon v-if="color.value === themeColor" style="color: white">mdi-check</v-icon>
             </v-btn>
+          </v-col>
+        </v-row>
+      </template>
+      <v-divider></v-divider>
+      <template>
+        <v-subheader>Theme Mode</v-subheader>
+        <v-row class="mx-1">
+          <v-col class="mx-1">
+            <v-switch
+              v-model="$vuetify.theme.dark"
+              :click="captureThemeMode()"
+              hide-details
+              inset
+              :color="themeColor"
+              :label="$vuetify.theme.dark? 'Switch to Light Mode' : 'Switch to Dark Mode'"
+            ></v-switch>
           </v-col>
         </v-row>
       </template>
@@ -165,6 +181,17 @@ export default {
       sessionStorage.setItem("prefs", JSON.stringify(prefsSession));
       store.commit("changeThemeColor", prefs.theme);
     },
+    captureThemeMode() {
+      store.commit("changeThemeMode", this.$vuetify.theme.dark);
+      let prefs = localStorage.getItem("prefs");
+      if (prefs) {
+        prefs = JSON.parse(prefs);
+        prefs.dark = this.$vuetify.theme.dark;
+      } else {
+        prefs = { dark: this.$vuetify.theme.dark };
+      }
+      localStorage.setItem("prefs", JSON.stringify(prefs));
+    },
   },
 
   computed: {
@@ -178,6 +205,7 @@ export default {
         prefs = JSON.parse(prefs);
         if (prefs.theme && prefs.theme.name && prefs.theme.value) {
           if (this.colors.find((color) => color.value === prefs.theme.value)) {
+            store.commit("changeThemeColor", prefs.theme);
             return prefs.theme.value;
           }
         }

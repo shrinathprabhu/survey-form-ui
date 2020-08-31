@@ -14,6 +14,9 @@ export default new Vuex.Store({
   mutations: {
     changeThemeColor(state, theme) {
       state.theme = theme
+    },
+    changeThemeMode(state, dark) {
+      state.dark = dark
     }
   },
   actions: {

@@ -12,7 +12,7 @@
             </v-col>
           </v-row>
         </v-card>
-        <v-card v-for="item in items" :key="item" shaped class="form-card">Create New Form</v-card>
+        <!-- <v-card v-for="item in items" :key="item" shaped class="form-card">Create New Form</v-card> -->
       </v-row>
     </v-col>
   </v-container>
@@ -37,7 +37,6 @@ export default {
   }),
   computed: {
     themeColor: () => {
-      console.log(store.state);
       return store.state.theme.value;
     },
   },
