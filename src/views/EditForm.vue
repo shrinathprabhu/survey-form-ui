@@ -2,6 +2,6 @@
 
 <script>
 export default {
-  name: "CreateForm",
+  name: "EditForm",
 };
 </script>

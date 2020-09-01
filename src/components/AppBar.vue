@@ -7,7 +7,7 @@
       <v-tooltip bottom>
         <template v-slot:activator="{ on, attrs }">
           <v-app-bar-nav-icon>
-            <v-btn icon v-bind="attrs" v-on="on" @click.stop="changeTheme = true">
+            <v-btn icon v-bind="attrs" v-on="on" @click.left="changeTheme = true">
               <v-icon>mdi-palette-outline</v-icon>
             </v-btn>
           </v-app-bar-nav-icon>

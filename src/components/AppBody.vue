@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-col style="padding-top: 60px; padding-left: 60px; padding-right: 60px;">
       <v-row>
-        <v-card shaped class="form-card">
+        <v-card shaped class="form-card" @click.left="createFormAndRedirectToEdit">
           <v-row align="center" justify="center" style="height: 205px;">
             <v-col>
               <v-row align="center" justify="center">
@@ -35,6 +35,10 @@ export default {
   data: () => ({
     items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9],
   }),
+  methods: {
+    async createFormAndRedirectToEdit() {},
+  },
+
   computed: {
     themeColor: () => {
       return store.state.theme.value;
