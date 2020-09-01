@@ -4,12 +4,10 @@ import 'vuetify/dist/vuetify.min.css';
 
 Vue.use(Vuetify);
 
-console.log(localStorage.getItem('prefs'));
-
 export default new Vuetify({
   theme: {
+    dark: typeof localStorage.getItem('prefs') === 'string' ? JSON.parse(localStorage.getItem('prefs')).dark : false,
     themes: {
-      dark: typeof localStorage.getItem('prefs') === 'string' ? JSON.parse(localStorage.getItem('prefs')).dark : false,
       light: {
         primary: '#ee44aa',
         secondary: '#424242',
