@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-col style="padding-top: 60px; padding-left: 60px; padding-right: 60px;">
       <v-row>
-        <v-card shaped class="form-card" @click.left="createFormAndRedirectToEdit">
+        <v-card shaped class="form-card" to="/forms/create">
           <v-row align="center" justify="center" style="height: 205px;">
             <v-col>
               <v-row align="center" justify="center">
@@ -28,21 +28,18 @@
 </style>
 
 <script>
-import store from "../store";
+// import store from "../store";
+import ThemeMixin from "../mixins/ThemeMixin";
 export default {
   name: "AppBody",
-
-  data: () => ({
-    items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-  }),
-  methods: {
-    async createFormAndRedirectToEdit() {},
-  },
+  mixins: [ThemeMixin],
+  data: () => ({}),
+  methods: {},
 
   computed: {
-    themeColor: () => {
-      return store.state.theme.value;
-    },
+    // themeColor: () => {
+    //   return store.state.theme.value;
+    // },
   },
 };
 </script>

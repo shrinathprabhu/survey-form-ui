@@ -14,11 +14,11 @@ const routes = [
     name: 'HomePage',
     component: HomePage
   },
-  // {
-  //   path: '/forms/create',
-  //   name: 'CreateForm',
-  //   component: () => import(/* webpackChunkName: "create-form" */ '../views/CreateForm.vue')
-  // }
+  {
+    path: '/forms/create',
+    name: 'CreateForm',
+    component: () => import(/* webpackChunkName: "create-form" */ '../views/CreateForm.vue')
+  }
 ];
 
 const router = new VueRouter({
