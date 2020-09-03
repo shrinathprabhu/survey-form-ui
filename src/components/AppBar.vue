@@ -2,8 +2,38 @@
   <div>
     <v-app-bar shrink-on-scroll hide-on-scroll prominent app v-bind:color="themeColor" dark>
       <v-img src="../assets/logo.png" max-height="35" max-width="35" class="mt-2 mr-2" contain></v-img>
-      <v-toolbar-title>Create Your Survey Form</v-toolbar-title>
+      <v-toolbar-title>{{appBarTitle}}</v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-tooltip v-if="canEdit" bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-app-bar-nav-icon>
+            <v-btn icon v-bind="attrs" v-on="on" @click.left="changeTheme = true">
+              <v-icon>mdi-eye-outline</v-icon>
+            </v-btn>
+          </v-app-bar-nav-icon>
+        </template>
+        <span>Preview</span>
+      </v-tooltip>
+      <v-tooltip v-if="canEdit" bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-app-bar-nav-icon>
+            <v-btn icon v-bind="attrs" v-on="on" @click.left="changeTheme = true">
+              <v-icon>mdi-content-save-outline</v-icon>
+            </v-btn>
+          </v-app-bar-nav-icon>
+        </template>
+        <span>Save changes</span>
+      </v-tooltip>
+      <v-tooltip v-if="canEdit" bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-app-bar-nav-icon>
+            <v-btn icon v-bind="attrs" v-on="on" @click.left="changeTheme = true">
+              <v-icon>mdi-publish</v-icon>
+            </v-btn>
+          </v-app-bar-nav-icon>
+        </template>
+        <span>Publish form</span>
+      </v-tooltip>
       <v-tooltip bottom>
         <template v-slot:activator="{ on, attrs }">
           <v-app-bar-nav-icon>
@@ -35,6 +65,7 @@
 
 <script>
 import ThemeMixin from "../mixins/ThemeMixin";
+import store from "../store";
 import ChangeThemeColor from "../components/ChangeThemeColor";
 import ChangeThemeMode from "../components/ChangeThemeMode";
 export default {
@@ -46,6 +77,13 @@ export default {
   },
   data: () => ({}),
   methods: {},
-  computed: {},
+  computed: {
+    appBarTitle: () => {
+      return store.state.appBarTitle;
+    },
+    canEdit: () => {
+      return store.state.canEdit;
+    },
+  },
 };
 </script>

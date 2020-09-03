@@ -72,7 +72,9 @@ export default new Vuex.Store({
         name: "Dark Yellow",
         value: "yellow darken-1",
       },
-    ]
+    ],
+    appBarTitle: "",
+    canEdit: false
   },
   mutations: {
     changeThemeColor(state, theme) {
@@ -83,6 +85,12 @@ export default new Vuex.Store({
     },
     toggleNav(state, changeTheme) {
       state.changeTheme = changeTheme;
+    },
+    changeAppBarTitle(state, appBarTitle) {
+      state.appBarTitle = appBarTitle;
+    },
+    toggleEdit(state, canEdit) {
+      state.canEdit = canEdit;
     }
   },
   actions: {

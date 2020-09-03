@@ -23,7 +23,7 @@
           <v-row align="center" justify="center" style="height: 205px;">
             <v-col>
               <v-row align="center" justify="center">
-                <v-icon style="font-size:80px" :color="themeColor">mdi-plus</v-icon>
+                <v-icon style="font-size:80px" :color="themeColor">mdi-pencil-box-outline</v-icon>
               </v-row>
               <v-row align="center" justify="center" class="mt-2">{{form.title}}</v-row>
             </v-col>

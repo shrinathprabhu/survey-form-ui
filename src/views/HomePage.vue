@@ -12,6 +12,7 @@
 import AppBar from "../components/AppBar";
 import AppBody from "../components/AppBody";
 import ThemeMixin from "../mixins/ThemeMixin";
+import store from "../store";
 export default {
   name: "HomePage",
   components: {
@@ -20,6 +21,9 @@ export default {
   },
   mixins: [ThemeMixin],
   data: () => ({}),
+  mounted: function () {
+    store.commit("changeAppBarTitle", "Survey Form Dashboard");
+  },
   methods: {},
   computed: {},
 };
