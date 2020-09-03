@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import ThemeMixin from "../mixins/ThemeMixin";
+import ThemeMixin from "../../mixins/ThemeMixin";
 export default {
   name: "FormBody",
   mixins: [ThemeMixin],

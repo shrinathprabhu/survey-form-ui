@@ -3,19 +3,22 @@
     <AppBar />
     <v-main>
       <FormBody />
+      <QuestionComponent :formDetails="formDetails" />
     </v-main>
   </v-app>
 </template>
 
 <script>
 import AppBar from "../components/AppBar";
-import FormBody from "../components/FormBody";
+import FormBody from "../components/EditForm/FormBody";
+import QuestionComponent from "../components/EditForm/QuestionComponent";
 import store from "../store";
 export default {
   name: "EditForm",
   components: {
     AppBar,
     FormBody,
+    QuestionComponent,
   },
   data: () => ({
     formDetails: {},
