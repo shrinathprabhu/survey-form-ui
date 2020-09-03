@@ -21,7 +21,6 @@ export default {
     formDetails: {},
   }),
   mounted: async function () {
-    console.log(this.$route.params);
     let response = await this.axios.get(
       "http://localhost:3000/forms/" + this.$route.params.id
     );
