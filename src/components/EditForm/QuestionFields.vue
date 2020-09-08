@@ -37,14 +37,28 @@
           <v-text-field
             v-model="options[index].name"
             :color="themeColor"
-            @keypress="addOptionOnEnter($event, index+1)"
+            @keypress="addOptionOnEnter($event, index)"
             :disabled="options[index].other"
             :autofocus="index === optionFocusIndex"
           ></v-text-field>
+          <v-tooltip v-if="options.length > 1" bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                v-bind="attrs"
+                v-on="on"
+                icon
+                class="mt-6 ml-3"
+                @click.stop="removeOption(index)"
+              >
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+            </template>
+            <span>Remove option</span>
+          </v-tooltip>
         </v-row>
         <div>
           <v-btn text link :color="themeColor" class="mr-1" @click.stop="addOption()">Add option</v-btn>
-          <span>or</span>
+          <span v-if="!otherAdded">or</span>
           <v-btn
             v-if="!otherAdded"
             text
@@ -125,7 +139,7 @@ export default {
           rank: nextIndex,
           name: "Option " + nextIndex,
         };
-        this.optionFocusIndex = otherIndex;
+        this.optionFocusIndex = otherIndex - 1;
         this.options.push({
           rank: nextIndex,
           name: "Other",
@@ -152,6 +166,12 @@ export default {
       if (event.key === "Enter") {
         this.addOption();
       }
+    },
+    removeOption(index) {
+      if (this.options[index].other === true) {
+        this.otherAdded = !this.otherAdded;
+      }
+      this.options.splice(index, 1);
     },
   },
 };
