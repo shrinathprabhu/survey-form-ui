@@ -1,14 +1,14 @@
 <template>
   <v-col>
-    <v-row class="px-5 py-2">
-      <v-col cols="9">
+    <v-row class="px-5">
+      <v-col cols="9" class="py-0">
         <v-text-field flat :color="themeColor" v-model="question.question"></v-text-field>
       </v-col>
-      <v-col cols="3">
+      <v-col cols="3" class="py-0">
         <v-select
           :color="themeColor"
           placeholder="Answer Type"
-          v-model="answerType"
+          v-model="question.answerType"
           :items="answerTypes"
           cache-items
           :item-color="themeColor"
@@ -24,6 +24,32 @@
         </v-select>
       </v-col>
     </v-row>
+    <v-row class="px-5">
+      <v-col cols="9" class="py-0" v-if="question.answerType === 'Short answer'">
+        <v-text-field placeholder="Short answer" disabled></v-text-field>
+      </v-col>
+      <v-col cols="12" class="py-0" v-if="question.answerType === 'Paragraph'">
+        <v-textarea placeholder="Paragraph" disabled no-resize rows="2"></v-textarea>
+      </v-col>
+      <v-col cols="10" class="py-0" v-if="question.answerType === 'Multiple choice'">
+        <v-row v-for="(option, index) in options" :key="index">
+          <v-icon class="mr-2 mt-n2 ml-1">mdi-radiobox-blank</v-icon>
+          <v-text-field v-model="options[index].name" :color="themeColor"></v-text-field>
+        </v-row>
+        <div>
+          <v-btn text link :color="themeColor" class="mr-1" @click.stop="addOption()">Add option</v-btn>
+          <span>or</span>
+          <v-btn
+            v-if="!otherAdded"
+            text
+            link
+            :color="themeColor"
+            class="ml-1"
+            @click.stop="addOther()"
+          >add "Other"</v-btn>
+        </div>
+      </v-col>
+    </v-row>
   </v-col>
 </template>
 
@@ -34,6 +60,7 @@ export default {
   props: ["question"],
   mixins: [ThemeMixin],
   data: () => ({
+    otherAdded: false,
     answerTypes: [
       {
         icon: "mdi-comment-text-outline",
@@ -66,10 +93,51 @@ export default {
         disabled: true,
       },
     ],
+    options: [],
   }),
-  computed: {
-    answerType: function () {
-      return this.question.answerType;
+  mounted: function () {
+    this.question.answerType = this.question.answerType || "Short answer";
+    this.options = this.question.options || [];
+    if (this.options.length === 0) {
+      this.options.push({
+        rank: 1,
+        name: "Option 1",
+      });
+    } else {
+      this.options = this.options.sort((o1, o2) => o1.rank - o2.rank);
+    }
+  },
+  methods: {
+    addOption() {
+      let nextIndex = this.options.length;
+      let otherIndex = this.options.findIndex(
+        (option) => option.other === true
+      );
+      if (otherIndex > -1) {
+        this.options[otherIndex] = {
+          rank: nextIndex,
+          name: "Option " + nextIndex,
+        };
+        this.options.push({
+          rank: nextIndex,
+          name: "Other",
+          other: true,
+        });
+      } else {
+        this.options.push({
+          rank: nextIndex + 1,
+          name: "Option " + (nextIndex + 1),
+        });
+      }
+    },
+    addOther() {
+      this.otherAdded = true;
+      let nextIndex = this.options.length + 1;
+      this.options.push({
+        rank: nextIndex,
+        name: "Other",
+        other: true,
+      });
     },
   },
 };
