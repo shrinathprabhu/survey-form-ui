@@ -33,6 +33,7 @@
           class="mt-3 mb-3"
           v-for="(question, index) in formDetails.questionnaires"
           :key="index"
+          :id="'question'+index"
         >
           <QuestionFields :question="question" />
         </v-card>
@@ -113,6 +114,11 @@ export default {
       this.formDetails.questionnaires.push({
         question: "Untitled Question",
         answerType: "Short answer",
+      });
+      this.$nextTick(() => {
+        let length = this.formDetails.questionnaires.length - 1;
+        let refName = "question" + length;
+        document.getElementById(refName).scrollIntoView({ behavior: "smooth" });
       });
     },
   },

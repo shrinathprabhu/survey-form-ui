@@ -139,12 +139,12 @@ export default {
           rank: nextIndex,
           name: "Option " + nextIndex,
         };
-        this.optionFocusIndex = otherIndex - 1;
         this.options.push({
           rank: nextIndex,
           name: "Other",
           other: true,
         });
+        this.optionFocusIndex = otherIndex;
       } else {
         this.options.push({
           rank: nextIndex + 1,
