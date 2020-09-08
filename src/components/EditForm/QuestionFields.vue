@@ -87,12 +87,61 @@
       </v-col>
       <v-col cols="12" class="py-0" v-if="question.answerType === 'Range'">
         <v-row>
-          <v-col cols="2">
-            <v-text-field :color="themeColor" placeholder="Lower limit" type="number"></v-text-field>
+          <v-col cols="4" sm="3" md="2">
+            <v-text-field
+              :color="themeColor"
+              placeholder="Lower limit"
+              label="Lower limit"
+              hint="Lower Limit"
+              v-model="range.lowerLimit"
+              type="number"
+            ></v-text-field>
           </v-col>
-          <v-col cols="2">
-            <v-text-field :color="themeColor" placeholder="Upper limit" type="number"></v-text-field>
+          <v-col cols="4" sm="3" md="2">
+            <v-text-field
+              :color="themeColor"
+              placeholder="Upper limit"
+              label="Upper limit"
+              hint="Upper Limit"
+              v-model="range.upperLimit"
+              type="number"
+            ></v-text-field>
           </v-col>
+          <v-col cols="4" sm="3" md="2">
+            <v-text-field
+              :color="themeColor"
+              placeholder="Number of steps"
+              label="Number of steps"
+              hint="Number of steps"
+              v-model="range.numberOfSteps"
+              type="number"
+            ></v-text-field>
+          </v-col>
+          <v-col>
+            <v-switch :color="themeColor" v-model="range.single" label="Switch to single mode"></v-switch>
+          </v-col>
+        </v-row>
+        <v-row>
+          <span class="mt-1 mx-2">Sample Range Slider:</span>
+          <v-slider
+            :color="themeColor"
+            hide-details
+            thumb-label
+            :min="range.lowerLimit"
+            :max="range.upperLimit"
+            :step="range.numberOfSteps"
+            v-if="range.single"
+          ></v-slider>
+          <v-range-slider
+            :color="themeColor"
+            hide-details
+            :track-fill-color="'red'"
+            thumb-label
+            :min="range.lowerLimit"
+            :max="range.upperLimit"
+            :step="range.numberOfSteps"
+            v-else
+          ></v-range-slider>
         </v-row>
       </v-col>
       <v-col cols="3" class="py-0" v-if="question.answerType === 'Date'">
@@ -153,10 +202,12 @@ export default {
       },
     ],
     options: [],
-    date: new Date().toISOString().substr(0, 10),
-    menu: false,
-    modal: false,
-    datepicker: false,
+    range: {
+      lowerLimit: 0,
+      upperLimit: 100,
+      numberOfSteps: 1,
+      single: false,
+    },
   }),
   mounted: function () {
     this.question.answerType = this.question.answerType || "Short answer";
