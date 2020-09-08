@@ -2,7 +2,7 @@
   <v-col>
     <v-row class="px-5">
       <v-col cols="6" md="9" class="py-0">
-        <v-text-field flat :color="themeColor" v-model="question.question"></v-text-field>
+        <v-text-field flat :color="themeColor" v-model="question.question" placeholder="Question"></v-text-field>
       </v-col>
       <v-col cols="6" md="3" class="py-0">
         <v-select
@@ -23,6 +23,14 @@
           </template>
         </v-select>
       </v-col>
+    </v-row>
+    <v-row class="mx-3 px-3" v-if="isDescription">
+      <v-text-field
+        flat
+        :color="themeColor"
+        v-model="question.description"
+        placeholder="Description"
+      ></v-text-field>
     </v-row>
     <v-row class="px-5">
       <v-col cols="9" class="py-0" v-if="question.answerType === 'Short answer'">
@@ -151,6 +159,11 @@
         <v-text-field disabled label="Time" append-icon="mdi-timer" readonly></v-text-field>
       </v-col>
     </v-row>
+    <v-divider class="mt-2"></v-divider>
+    <v-row class="mx-3 px-3" justify="end">
+      <v-switch :color="themeColor" v-model="isDescription" label="Description" class="mr-5"></v-switch>
+      <v-switch :color="themeColor" v-model="isRequired" label="Required"></v-switch>
+    </v-row>
   </v-col>
 </template>
 
@@ -208,6 +221,8 @@ export default {
       numberOfSteps: 1,
       single: false,
     },
+    isRequired: false,
+    isDescription: false,
   }),
   mounted: function () {
     this.question.answerType = this.question.answerType || "Short answer";
