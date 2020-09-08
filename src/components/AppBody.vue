@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-col style="padding-top: 60px; padding-left: 60px; padding-right: 60px;">
+    <v-col class="custom-container">
       <v-row>
         <v-card shaped class="form-card" to="/forms/create" elevation="5">
           <v-row align="center" justify="center" style="height: 205px;">
@@ -41,6 +41,18 @@
   height: 205px;
   cursor: pointer;
 }
+.custom-container {
+  padding-top: 60px;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+@media only screen and (max-width: 600px) {
+  .custom-container {
+    padding-top: 60px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+} ;
 </style>
 
 <script>

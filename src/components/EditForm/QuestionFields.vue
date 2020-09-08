@@ -1,10 +1,10 @@
 <template>
   <v-col>
     <v-row class="px-5">
-      <v-col cols="9" class="py-0">
+      <v-col cols="6" md="9" class="py-0">
         <v-text-field flat :color="themeColor" v-model="question.question"></v-text-field>
       </v-col>
-      <v-col cols="3" class="py-0">
+      <v-col cols="6" md="3" class="py-0">
         <v-select
           :color="themeColor"
           placeholder="Answer Type"
@@ -84,6 +84,16 @@
             @click.stop="addOther()"
           >add "Other"</v-btn>
         </div>
+      </v-col>
+      <v-col cols="12" class="py-0" v-if="question.answerType === 'Range'">
+        <v-row>
+          <v-col cols="2">
+            <v-text-field :color="themeColor" placeholder="Lower limit" type="number"></v-text-field>
+          </v-col>
+          <v-col cols="2">
+            <v-text-field :color="themeColor" placeholder="Upper limit" type="number"></v-text-field>
+          </v-col>
+        </v-row>
       </v-col>
       <v-col cols="3" class="py-0" v-if="question.answerType === 'Date'">
         <v-text-field disabled label="Month, day, year" append-icon="mdi-calendar" readonly></v-text-field>
