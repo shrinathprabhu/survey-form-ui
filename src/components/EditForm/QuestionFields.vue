@@ -41,7 +41,7 @@ export default {
         text: "Short answer",
       },
       {
-        icon: "mdi-comment-text-outline",
+        icon: "mdi-view-headline",
         value: "Paragraph",
         text: "Paragraph",
       },
@@ -56,9 +56,15 @@ export default {
         value: "Dropdown",
         text: "Dropdown",
       },
-      { icon: "mdi-comment-text-outline", value: "Range", text: "Range" },
+      { icon: "mdi-ray-start-end", value: "Range", text: "Range" },
       { icon: "mdi-calendar", value: "Date", text: "Date" },
       { icon: "mdi-timer", value: "Time", text: "Time" },
+      {
+        icon: "mdi-cloud-upload",
+        value: "File upload (Coming soon)",
+        text: "File upload",
+        disabled: true,
+      },
     ],
   }),
   computed: {
