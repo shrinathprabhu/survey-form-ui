@@ -34,7 +34,13 @@
       <v-col cols="10" class="py-0" v-if="question.answerType === 'Multiple choice'">
         <v-row v-for="(option, index) in options" :key="index">
           <v-icon class="mr-2 mt-n2 ml-1">mdi-radiobox-blank</v-icon>
-          <v-text-field v-model="options[index].name" :color="themeColor"></v-text-field>
+          <v-text-field
+            v-model="options[index].name"
+            :color="themeColor"
+            @keypress="addOptionOnEnter($event, index+1)"
+            :disabled="options[index].other"
+            :autofocus="index === optionFocusIndex"
+          ></v-text-field>
         </v-row>
         <div>
           <v-btn text link :color="themeColor" class="mr-1" @click.stop="addOption()">Add option</v-btn>
@@ -61,6 +67,7 @@ export default {
   mixins: [ThemeMixin],
   data: () => ({
     otherAdded: false,
+    optionFocusIndex: false,
     answerTypes: [
       {
         icon: "mdi-comment-text-outline",
@@ -118,6 +125,7 @@ export default {
           rank: nextIndex,
           name: "Option " + nextIndex,
         };
+        this.optionFocusIndex = otherIndex;
         this.options.push({
           rank: nextIndex,
           name: "Other",
@@ -128,6 +136,7 @@ export default {
           rank: nextIndex + 1,
           name: "Option " + (nextIndex + 1),
         });
+        this.optionFocusIndex = nextIndex;
       }
     },
     addOther() {
@@ -138,6 +147,11 @@ export default {
         name: "Other",
         other: true,
       });
+    },
+    addOptionOnEnter(event) {
+      if (event.key === "Enter") {
+        this.addOption();
+      }
     },
   },
 };
