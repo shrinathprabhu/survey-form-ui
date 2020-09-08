@@ -34,7 +34,7 @@
       <v-col
         cols="10"
         class="py-0"
-        v-if="question.answerType === 'Multiple choice' || question.answerType === 'Checkbox'"
+        v-if="['Multiple choice', 'Checkbox', 'Dropdown'].includes(question.answerType)"
       >
         <v-row v-for="(option, index) in options" :key="index">
           <v-icon
@@ -45,6 +45,11 @@
             v-if="question.answerType === 'Checkbox'"
             class="mr-2 mt-n2 ml-1"
           >mdi-checkbox-blank-outline</v-icon>
+          <span
+            v-if="question.answerType === 'Dropdown'"
+            class="mr-3 mt-4 ml-2"
+            style="font-size: 1.3em"
+          >{{(index+1)}}.</span>
           <v-text-field
             v-model="options[index].name"
             :color="themeColor"
