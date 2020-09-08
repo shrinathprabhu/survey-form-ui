@@ -69,6 +69,12 @@
           >add "Other"</v-btn>
         </div>
       </v-col>
+      <v-col cols="3" class="py-0" v-if="question.answerType === 'Date'">
+        <v-text-field disabled label="Month, day, year" append-icon="mdi-calendar" readonly></v-text-field>
+      </v-col>
+      <v-col cols="2" class="py-0" v-if="question.answerType === 'Time'">
+        <v-text-field disabled label="Time" append-icon="mdi-timer" readonly></v-text-field>
+      </v-col>
     </v-row>
   </v-col>
 </template>
@@ -115,6 +121,10 @@ export default {
       },
     ],
     options: [],
+    date: new Date().toISOString().substr(0, 10),
+    menu: false,
+    modal: false,
+    datepicker: false,
   }),
   mounted: function () {
     this.question.answerType = this.question.answerType || "Short answer";
