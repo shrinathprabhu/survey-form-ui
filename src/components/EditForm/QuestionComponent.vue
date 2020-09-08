@@ -42,7 +42,7 @@
       <v-card elevation="3" style="position: fixed; right: 10px">
         <v-col class="px-5">
           <v-row class="py-1">
-            <v-tooltip bottom>
+            <v-tooltip bottom content-class="small-tooltip">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn v-bind="attrs" v-on="on" icon elevation="0" @click.stop="addQuestion()">
                   <v-icon>mdi-plus-circle-outline</v-icon>
@@ -52,7 +52,7 @@
             </v-tooltip>
           </v-row>
           <v-row class="py-1">
-            <v-tooltip bottom>
+            <v-tooltip bottom content-class="small-tooltip">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn v-bind="attrs" v-on="on" icon elevation="0">
                   <v-icon>mdi-format-page-break</v-icon>
@@ -62,7 +62,7 @@
             </v-tooltip>
           </v-row>
           <v-row class="py-1">
-            <v-tooltip bottom>
+            <v-tooltip bottom content-class="small-tooltip">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn v-bind="attrs" v-on="on" icon elevation="0">
                   <v-icon>mdi-cogs</v-icon>
@@ -72,7 +72,7 @@
             </v-tooltip>
           </v-row>
           <v-row class="py-1">
-            <v-tooltip bottom>
+            <v-tooltip bottom content-class="small-tooltip">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn v-bind="attrs" v-on="on" icon elevation="0">
                   <v-icon>mdi-export-variant</v-icon>
@@ -91,6 +91,10 @@
 <style scoped>
 .form-title {
   font-size: 36px;
+}
+
+.small-tooltip {
+  font-size: 0.7em;
 }
 </style>
 

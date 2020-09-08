@@ -31,9 +31,20 @@
       <v-col cols="12" class="py-0" v-if="question.answerType === 'Paragraph'">
         <v-textarea placeholder="Paragraph" disabled no-resize rows="2"></v-textarea>
       </v-col>
-      <v-col cols="10" class="py-0" v-if="question.answerType === 'Multiple choice'">
+      <v-col
+        cols="10"
+        class="py-0"
+        v-if="question.answerType === 'Multiple choice' || question.answerType === 'Checkbox'"
+      >
         <v-row v-for="(option, index) in options" :key="index">
-          <v-icon class="mr-2 mt-n2 ml-1">mdi-radiobox-blank</v-icon>
+          <v-icon
+            v-if="question.answerType === 'Multiple choice'"
+            class="mr-2 mt-n2 ml-1"
+          >mdi-radiobox-blank</v-icon>
+          <v-icon
+            v-if="question.answerType === 'Checkbox'"
+            class="mr-2 mt-n2 ml-1"
+          >mdi-checkbox-blank-outline</v-icon>
           <v-text-field
             v-model="options[index].name"
             :color="themeColor"
@@ -41,7 +52,7 @@
             :disabled="options[index].other"
             :autofocus="index === optionFocusIndex"
           ></v-text-field>
-          <v-tooltip v-if="options.length > 1" bottom>
+          <v-tooltip content-class="small-tooltip" v-if="options.length > 1" bottom>
             <template v-slot:activator="{ on, attrs }">
               <v-btn
                 v-bind="attrs"
@@ -78,6 +89,12 @@
     </v-row>
   </v-col>
 </template>
+
+<style scoped>
+.small-tooltip {
+  font-size: 0.7em;
+}
+</style>
 
 <script>
 import ThemeMixin from "../../mixins/ThemeMixin";
