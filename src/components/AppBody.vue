@@ -70,7 +70,9 @@ export default {
   },
   methods: {
     async fetchForms() {
-      let response = await this.axios.get("http://localhost:3000/forms");
+      let response = await this.axios.get(
+        process.env.VUE_APP_BASE_URL + "/forms"
+      );
       if (response.status === 200) {
         if (response.data && response.data.code === 200) {
           return response.data.data;

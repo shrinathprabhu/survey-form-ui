@@ -32,5 +32,8 @@ export default {
   data: () => ({}),
   methods: {},
   computed: {},
+  mounted: function () {
+    // console.log(process.env);
+  },
 };
 </script>

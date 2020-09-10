@@ -24,6 +24,15 @@ const routes = [
     path: '/forms/:id/edit',
     name: 'EditForm',
     component: () => import(/* webpackChunkName: "edit-form" */ '../views/EditForm.vue')
+  },
+  {
+    path: '/404',
+    name: 'PageNotFound',
+    component: () => import(/* webpackChunkName: "404" */ '../views/PageNotFound.vue')
+  },
+  {
+    path: '*',
+    redirect: '/404'
   }
 ];
 

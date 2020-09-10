@@ -22,7 +22,7 @@ export default {
   mixins: [ThemeMixin],
   data: () => ({}),
   mounted: function () {
-    store.commit("changeAppBarTitle", "Survey Form Dashboard");
+    store.commit("changeAppBarTitle", "Openforms Dashboard");
   },
   methods: {},
   computed: {},

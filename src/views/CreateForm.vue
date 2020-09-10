@@ -40,7 +40,7 @@ export default {
   methods: {
     async createForm() {
       let response = await this.axios.post(
-        "http://localhost:3000/forms/create"
+        process.env.VUE_APP_BASE_URL + "/forms/create"
       );
       if (response.status === 200) {
         if (response.data && response.data.code === 200) {

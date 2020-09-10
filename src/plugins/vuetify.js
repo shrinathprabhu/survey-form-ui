@@ -9,13 +9,13 @@ export default new Vuetify({
     dark: typeof localStorage.getItem('prefs') === 'string' ? JSON.parse(localStorage.getItem('prefs')).dark : false,
     themes: {
       // light: {
-      //   primary: '#ee44aa',
-      //   secondary: '#424242',
-      //   accent: '#82B1FF',
-      //   error: '#FF5252',
-      //   info: '#2196F3',
-      //   success: '#4CAF50',
-      //   warning: '#FFC107'
+      //   primary: '#E53935',
+      //   secondary: '#E53935',
+      //   accent: '#E53935',
+      // error: '#FF5252',
+      // info: '#2196F3',
+      // success: '#4CAF50',
+      // warning: '#FFC107'
       // },
     },
   },

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar hide-on-scroll prominent app v-bind:color="themeColor" dark>
+    <v-app-bar shrink-on-scroll hide-on-scroll prominent app v-bind:color="themeColor" dark>
       <v-img src="../assets/logo.png" max-height="35" max-width="35" class="mt-2 mr-2" contain></v-img>
       <v-toolbar-title>{{appBarTitle}}</v-toolbar-title>
       <v-spacer></v-spacer>
