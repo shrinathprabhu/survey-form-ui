@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import HomePage from '../views/HomePage';
+import PageNotFound from '../views/PageNotFound';
+import SomethingWentWrong from '../views/SomethingWentWrong';
 import store from '../store';
 
 Vue.use(VueRouter);
@@ -28,7 +30,12 @@ const routes = [
   {
     path: '/404',
     name: 'PageNotFound',
-    component: () => import(/* webpackChunkName: "404" */ '../views/PageNotFound.vue')
+    component: PageNotFound
+  },
+  {
+    path: '/500',
+    name: 'SomethingWentWrong',
+    component: SomethingWentWrong
   },
   {
     path: '*',

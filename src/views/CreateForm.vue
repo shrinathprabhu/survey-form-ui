@@ -33,8 +33,12 @@ export default {
         this.loadingDots = ".  ";
       }
     }, 1000);
-    let responseData = await this.createForm();
-    this.$router.push(`/forms/${responseData.id}/edit`);
+    try {
+      let responseData = await this.createForm();
+      this.$router.push(`/forms/${responseData.id}/edit`);
+    } catch (e) {
+      this.$router.push("/500");
+    }
     clearInterval(loader);
   },
   methods: {
@@ -45,8 +49,8 @@ export default {
       if (response.status === 200) {
         if (response.data && response.data.code === 200) {
           return response.data.data;
-        }
-      } else throw alert("Error");
+        } else throw response.data.message;
+      } else throw response.statusMessage;
     },
   },
 };

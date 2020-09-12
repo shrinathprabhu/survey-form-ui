@@ -47,6 +47,12 @@
   padding-right: 60px;
 }
 @media only screen and (max-width: 600px) {
+  .form-card {
+    margin: 20px 0px 20px 30px;
+    width: 150px;
+    height: 205px;
+    cursor: pointer;
+  }
   .custom-container {
     padding-top: 60px;
     padding-left: 0px;

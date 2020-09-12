@@ -33,6 +33,7 @@ export default {
     pageNotFound: false,
   }),
   mounted: async function () {
+    // window.addEventListener("hashchange", this.handleBackButton, false);
     let response = await this.axios.get(
       process.env.VUE_APP_BASE_URL + "/forms/" + this.$route.params.id
     );
@@ -47,12 +48,20 @@ export default {
     }
     this.autoSave();
   },
+  beforeDestroy: function () {
+    // window.removeEventListener("hashchange", this.handleBackButton);
+  },
   methods: {
     autoSave() {
       // setInterval(() => {
       //   console.log("Saving...", formStore.state.form);
       // }, 2500);
     },
+    handleBackButton() {
+      console.log("backpress");
+      // this.$router.push("/forms");
+    },
   },
+  watch: {},
 };
 </script>

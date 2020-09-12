@@ -39,7 +39,7 @@
         </v-card>
       </v-col>
       <!-- <v-layout row wrap> -->
-      <v-card elevation="3" style="position: fixed; right: 10px">
+      <v-card elevation="3" style="position: fixed; top: 210px; right: 10px">
         <v-col class="px-5">
           <v-row class="py-1">
             <v-tooltip bottom content-class="small-tooltip">
