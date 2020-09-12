@@ -21,6 +21,10 @@ export default {
   },
   mixins: [ThemeMixin],
   data: () => ({}),
+  created: function () {
+    window.document.title = "Openforms Dashboard";
+    store.commit("changeAppBarTitle", window.document.title);
+  },
   mounted: function () {
     window.document.title = "Openforms Dashboard";
     store.commit("changeAppBarTitle", window.document.title);
