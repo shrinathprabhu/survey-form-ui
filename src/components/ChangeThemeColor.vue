@@ -2,7 +2,12 @@
   <div>
     <v-subheader>Theme Color</v-subheader>
     <v-row class="mx-1">
-      <v-col class="mx-1" style="width: 35px" v-for="color in colors" :key="color.name">
+      <v-col
+        :class="$vuetify.breakpoint.mobile ? 'mx-2' : 'mx-1'"
+        style="width: 35px"
+        v-for="color in colors"
+        :key="color.name"
+      >
         <v-btn
           :ripple="false"
           fab

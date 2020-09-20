@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar shrink-on-scroll hide-on-scroll prominent app v-bind:color="themeColor" dark>
+    <v-app-bar shrink-on-scroll hide-on-scroll prominent app fixed v-bind:color="themeColor" dark>
       <v-img src="../assets/logo.png" max-height="35" max-width="35" class="mt-2 mr-2" contain></v-img>
       <v-toolbar-title>{{appBarTitle}}</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -45,7 +45,13 @@
         <span>Change theme</span>
       </v-tooltip>
     </v-app-bar>
-    <v-navigation-drawer absolute temporary right v-model="changeTheme">
+    <v-navigation-drawer
+      v-if="!$vuetify.breakpoint.mobile"
+      absolute
+      temporary
+      right
+      v-model="changeTheme"
+    >
       <template v-slot:prepend>
         <v-row class="my-3 mx-3">
           <v-icon v-bind:color="themeColor">mdi-palette-outline</v-icon>
@@ -60,6 +66,29 @@
       <v-divider></v-divider>
       <ChangeThemeMode />
     </v-navigation-drawer>
+
+    <v-dialog v-if="$vuetify.breakpoint.mobile" v-model="changeTheme" max-width="290">
+      <v-card>
+        <template v-slot:prepend>
+          <v-row class="my-3 mx-3">
+            <v-icon v-bind:color="themeColor">mdi-palette-outline</v-icon>
+            <v-col>Theme Options</v-col>
+            <v-btn class="mt-1" icon @click.stop="changeTheme = false">
+              <v-icon>mdi-window-close</v-icon>
+            </v-btn>
+          </v-row>
+        </template>
+        <v-divider></v-divider>
+        <ChangeThemeColor />
+        <v-divider></v-divider>
+        <ChangeThemeMode />
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn color="green darken-1" text @click="changeTheme = false">Ok</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
