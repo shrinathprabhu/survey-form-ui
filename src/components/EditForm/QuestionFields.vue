@@ -1,6 +1,6 @@
 <template>
   <v-col>
-    <v-row class="px-5">
+    <v-row v-if="!$vuetify.breakpoint.mobile" class="px-5">
       <v-col cols="6" md="9" class="py-0">
         <v-text-field flat :color="themeColor" v-model="question.question" placeholder="Question"></v-text-field>
       </v-col>
@@ -24,7 +24,31 @@
         </v-select>
       </v-col>
     </v-row>
-    <v-row class="mx-3 px-3" v-if="isDescription">
+    <v-row v-else class="px-8">
+      <v-row>
+        <v-text-field flat :color="themeColor" v-model="question.question" placeholder="Question"></v-text-field>
+      </v-row>
+      <v-row>
+        <v-select
+          :color="themeColor"
+          placeholder="Answer Type"
+          v-model="question.answerType"
+          :items="answerTypes"
+          cache-items
+          :item-color="themeColor"
+        >
+          <template v-slot:selection="data">
+            <v-icon :color="themeColor" class="px-2">{{data.item.icon}}</v-icon>
+            <span>{{data.item.value}}</span>
+          </template>
+          <template v-slot:item="data">
+            <v-icon :color="themeColor" class="px-2">{{data.item.icon}}</v-icon>
+            <span>{{data.item.value}}</span>
+          </template>
+        </v-select>
+      </v-row>
+    </v-row>
+    <v-row :class="$vuetify.breakpoint.mobile ? 'px-2 mx-1' : 'px-3 mx-2'" v-if="isDescription">
       <v-text-field
         flat
         :color="themeColor"
@@ -80,9 +104,9 @@
             <span>Remove option</span>
           </v-tooltip>
         </v-row>
-        <div>
+        <v-row v-if="!$vuetify.breakpoint.mobile">
           <v-btn text link :color="themeColor" class="mr-1" @click.stop="addOption()">Add option</v-btn>
-          <span v-if="!otherAdded">or</span>
+          <span class="ma-1" v-if="!otherAdded">OR</span>
           <v-btn
             v-if="!otherAdded"
             text
@@ -91,7 +115,24 @@
             class="ml-1"
             @click.stop="addOther()"
           >add "Other"</v-btn>
-        </div>
+        </v-row>
+        <v-col v-else style="width: 100%">
+          <v-row align="center" justify="center">
+            <v-btn text link :color="themeColor" @click.stop="addOption()">Add option</v-btn>
+          </v-row>
+          <v-row align="center" justify="center">
+            <span class="ma-1" v-if="!otherAdded">OR</span>
+          </v-row>
+          <v-row align="center" justify="center">
+            <v-btn
+              v-if="!otherAdded"
+              text
+              link
+              :color="themeColor"
+              @click.stop="addOther()"
+            >add "Other"</v-btn>
+          </v-row>
+        </v-col>
       </v-col>
       <v-col cols="12" class="py-0" v-if="question.answerType === 'Range'">
         <v-row>
@@ -160,7 +201,7 @@
       </v-col>
     </v-row>
     <v-divider class="mt-2"></v-divider>
-    <v-row class="mx-3 px-3" justify="end">
+    <v-row class="px-3" :justify="!$vuetify.breakpoint.mobile ?'end': 'center'">
       <v-switch :color="themeColor" v-model="isDescription" label="Description" class="mr-5"></v-switch>
       <v-switch :color="themeColor" v-model="isRequired" label="Required"></v-switch>
     </v-row>
