@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col class="mr-5">
+      <v-col class="mr-1">
         <v-card shaped elevation="2" outlined class="pb-5 mb-5">
           <v-col class="px-6" style="padding-bottom: 0">
             <v-text-field

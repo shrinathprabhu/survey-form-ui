@@ -66,11 +66,11 @@ export default new Vuex.Store({
       },
       {
         name: "Dark Grey",
-        value: "grey darken-4",
+        value: "grey darken-2",
       },
       {
         name: "Dark Yellow",
-        value: "yellow darken-1",
+        value: "yellow darken-2",
       },
     ],
     appBarTitle: "",

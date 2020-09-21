@@ -56,7 +56,7 @@
         placeholder="Description"
       ></v-text-field>
     </v-row>
-    <v-row class="px-5">
+    <v-row :class="$vuetify.breakpoint.mobile ? 'px-2' : 'px-5'">
       <v-col cols="9" class="py-0" v-if="question.answerType === 'Short answer'">
         <v-text-field placeholder="Short answer" disabled></v-text-field>
       </v-col>
@@ -64,49 +64,48 @@
         <v-textarea placeholder="Paragraph" disabled no-resize rows="2"></v-textarea>
       </v-col>
       <v-col
-        cols="10"
-        class="py-0"
+        :cols="$vuetify.breakpoint.mobile ? 12 :10"
+        class="px-5"
         v-if="['Multiple choice', 'Checkbox', 'Dropdown'].includes(question.answerType)"
       >
         <v-row v-for="(option, index) in options" :key="index">
-          <v-icon
-            v-if="question.answerType === 'Multiple choice'"
-            class="mr-2 mt-n2 ml-1"
-          >mdi-radiobox-blank</v-icon>
-          <v-icon
-            v-if="question.answerType === 'Checkbox'"
-            class="mr-2 mt-n2 ml-1"
-          >mdi-checkbox-blank-outline</v-icon>
-          <span
-            v-if="question.answerType === 'Dropdown'"
-            class="mr-3 mt-4 ml-2"
-            style="font-size: 1.3em"
-          >{{(index+1)}}.</span>
           <v-text-field
             v-model="options[index].name"
             :color="themeColor"
             @keypress="addOptionOnEnter($event, index)"
             :disabled="options[index].other"
             :autofocus="index === optionFocusIndex"
-          ></v-text-field>
-          <v-tooltip content-class="small-tooltip" v-if="options.length > 1" bottom>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                v-bind="attrs"
-                v-on="on"
-                icon
-                class="mt-6 ml-3"
-                @click.stop="removeOption(index)"
-              >
-                <v-icon>mdi-close</v-icon>
-              </v-btn>
+          >
+            <template v-slot:prepend>
+              <v-icon
+                v-if="question.answerType === 'Multiple choice' || question.answerType === 'Checkbox'"
+                class="ml-1 icon-align-to-textfield"
+              >{{question.answerType === 'Multiple choice' ? 'mdi-radiobox-blank' : 'mdi-checkbox-blank-outline'}}</v-icon>
+              <span
+                v-if="question.answerType === 'Dropdown'"
+                class="mt-1 mx-1"
+                style="font-size: 1.3em"
+              >{{(index+1)}}.</span>
             </template>
-            <span>Remove option</span>
-          </v-tooltip>
+            <template v-slot:append-outer>
+              <v-tooltip content-class="small-tooltip" v-if="options.length > 1" bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon
+                    class="icon-align-to-textfield"
+                    v-bind="attrs"
+                    v-on="on"
+                    icon
+                    @click.stop="removeOption(index)"
+                  >mdi-close</v-icon>
+                </template>
+                <span>Remove option</span>
+              </v-tooltip>
+            </template>
+          </v-text-field>
         </v-row>
         <v-row v-if="!$vuetify.breakpoint.mobile">
           <v-btn text link :color="themeColor" class="mr-1" @click.stop="addOption()">Add option</v-btn>
-          <span class="ma-1" v-if="!otherAdded">OR</span>
+          <span class="mx-1" style="margin-top: 6px" v-if="!otherAdded">OR</span>
           <v-btn
             v-if="!otherAdded"
             text
@@ -170,7 +169,7 @@
             <v-switch :color="themeColor" v-model="range.single" label="Switch to single mode"></v-switch>
           </v-col>
         </v-row>
-        <v-row>
+        <v-layout :row="!$vuetify.breakpoint.mobile" :column="$vuetify.breakpoint.mobile">
           <span class="mt-1 mx-2">Sample Range Slider:</span>
           <v-slider
             :color="themeColor"
@@ -184,26 +183,39 @@
           <v-range-slider
             :color="themeColor"
             hide-details
-            :track-fill-color="'red'"
             thumb-label
             :min="range.lowerLimit"
             :max="range.upperLimit"
             :step="range.numberOfSteps"
             v-else
           ></v-range-slider>
-        </v-row>
+        </v-layout>
       </v-col>
-      <v-col cols="3" class="py-0" v-if="question.answerType === 'Date'">
+      <v-col
+        :cols="$vuetify.breakpoint.mobile ? '9' : '3'"
+        class="py-0"
+        v-if="question.answerType === 'Date'"
+      >
         <v-text-field disabled label="Month, day, year" append-icon="mdi-calendar" readonly></v-text-field>
       </v-col>
-      <v-col cols="2" class="py-0" v-if="question.answerType === 'Time'">
+      <v-col
+        :cols="$vuetify.breakpoint.mobile ? '8' : '2'"
+        class="py-0"
+        v-if="question.answerType === 'Time'"
+      >
         <v-text-field disabled label="Time" append-icon="mdi-timer" readonly></v-text-field>
       </v-col>
     </v-row>
     <v-divider class="mt-2"></v-divider>
     <v-row class="px-3" :justify="!$vuetify.breakpoint.mobile ?'end': 'center'">
       <v-switch :color="themeColor" v-model="isDescription" label="Description" class="mr-5"></v-switch>
-      <v-switch :color="themeColor" v-model="isRequired" label="Required"></v-switch>
+      <v-switch :color="themeColor" v-model="isRequired" label="Required" class="mr-5"></v-switch>
+      <v-switch
+        v-if="['Short answer', 'Paragraph'].includes(question.answerType)"
+        :color="themeColor"
+        v-model="validate"
+        label="Add Validation"
+      ></v-switch>
     </v-row>
   </v-col>
 </template>
@@ -211,6 +223,9 @@
 <style scoped>
 .small-tooltip {
   font-size: 0.7em;
+}
+.icon-align-to-textfield {
+  margin-top: 3px;
 }
 </style>
 
@@ -265,6 +280,7 @@ export default {
     },
     isRequired: false,
     isDescription: false,
+    validate: false,
   }),
   mounted: function () {
     this.question.answerType = this.question.answerType || "Short answer";
