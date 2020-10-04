@@ -13,6 +13,8 @@
               class="form-title"
               single-line
               hide-details
+              @keypress.enter="moveToDescription"
+              autofocus
             ></v-text-field>
           </v-col>
           <v-col class="px-6">
@@ -24,6 +26,7 @@
               :loading="fieldsLoading"
               single-line
               hide-details
+              ref="description"
             ></v-text-field>
           </v-col>
         </v-card>
@@ -101,6 +104,7 @@
 <script>
 import ThemeMixin from "../../mixins/ThemeMixin";
 import QuestionFields from "./QuestionFields";
+import store from "../../store";
 export default {
   name: "QuestionComponent",
   mixins: [ThemeMixin],
@@ -111,6 +115,7 @@ export default {
       return this.formDetails ? false : true;
     },
   },
+  data: () => ({}),
   methods: {
     addQuestion: function () {
       this.formDetails = this.formDetails || {};
@@ -124,6 +129,14 @@ export default {
         let refName = "question" + length;
         document.getElementById(refName).scrollIntoView({ behavior: "smooth" });
       });
+    },
+    moveToDescription: function () {
+      this.$refs.description.focus();
+    },
+  },
+  watch: {
+    "formDetails.title": function (newTitle) {
+      store.commit("changeAppBarTitle", newTitle);
     },
   },
 };

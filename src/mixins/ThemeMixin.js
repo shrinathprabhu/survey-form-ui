@@ -26,6 +26,7 @@ export default {
                 sessionStorage.setItem("prefs", JSON.stringify(prefs));
             }
             store.commit("changeThemeColor", prefs.theme);
+            document.querySelector("link[rel*='icon']").href = "favicons/" + prefs.theme.icon;
             return prefs.theme.value;
         },
         changeThemeColor(theme) {
@@ -46,6 +47,7 @@ export default {
             }
             sessionStorage.setItem("prefs", JSON.stringify(prefsSession));
             store.commit("changeThemeColor", prefs.theme);
+            document.querySelector("link[rel*='icon']").href = "favicons/" + prefs.theme.icon;
         },
         captureThemeMode() {
             store.commit("changeThemeMode", this.$vuetify.theme.dark);
@@ -63,6 +65,9 @@ export default {
         themeColor: function () {
             let theme = store.state.theme;
             if (theme && theme.value) {
+                if (theme.icon) {
+                    document.querySelector("link[rel*='icon']").href = "favicons/" + theme.icon;
+                }
                 return theme.value;
             }
             let prefs = localStorage.getItem("prefs");
@@ -71,6 +76,7 @@ export default {
                 if (prefs.theme && prefs.theme.name && prefs.theme.value) {
                     if (this.colors.find((color) => color.value === prefs.theme.value)) {
                         store.commit("changeThemeColor", prefs.theme);
+                        document.querySelector("link[rel*='icon']").href = "favicons/" + prefs.theme.icon;
                         return prefs.theme.value;
                     }
                 }

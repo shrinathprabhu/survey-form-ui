@@ -19,7 +19,6 @@ import FormBody from "../components/EditForm/FormBody";
 import QuestionComponent from "../components/EditForm/QuestionComponent";
 import PageNotFound from "./PageNotFound";
 import store from "../store";
-import formStore from "../store/form";
 export default {
   name: "EditForm",
   components: {
@@ -31,21 +30,16 @@ export default {
   data: () => ({
     formDetails: {},
     pageNotFound: false,
+    dialog: false,
   }),
+  created: async function () {
+    window.addEventListener("popstate", this.handleBackButton);
+    await this.fetchForm();
+    // this.autoSave();
+  },
   mounted: async function () {
     // window.addEventListener("hashchange", this.handleBackButton, false);
-    let response = await this.axios.get(
-      process.env.VUE_APP_BASE_URL + "/forms/" + this.$route.params.id
-    );
-    if (response.data && response.data.data && response.data.data.isCreator) {
-      this.formDetails = response.data.data;
-      // window.document.title = this.formDetails.title;
-      // store.commit("changeAppBarTitle", this.formDetails.title);
-      store.commit("toggleEdit", true);
-      formStore.commit("updateForm", this.formDetails);
-    } else {
-      this.pageNotFound = true;
-    }
+    // await this.fetchForm();
     this.autoSave();
   },
   beforeDestroy: function () {
@@ -53,13 +47,31 @@ export default {
   },
   methods: {
     autoSave() {
-      // setInterval(() => {
-      //   console.log("Saving...", formStore.state.form);
-      // }, 2500);
+      setInterval(async () => {
+        let formId = this.formDetails.id;
+        let response = await this.axios.put(
+          `${process.env.VUE_APP_BASE_URL}/forms/${formId}/save`,
+          this.formDetails
+        );
+        if (response.data && response.data.data) {
+          // Do nothing
+        } else {
+          this.pageNotFound = true;
+        }
+      }, 5000);
     },
-    handleBackButton() {
-      console.log("backpress");
-      // this.$router.push("/forms");
+    handleBackButton() {},
+    async fetchForm() {
+      let response = await this.axios.get(
+        process.env.VUE_APP_BASE_URL + "/forms/" + this.$route.params.id
+      );
+      if (response.data && response.data.data && response.data.data.isCreator) {
+        this.formDetails = response.data.data;
+        store.commit("changeAppBarTitle", this.formDetails.title);
+        store.commit("toggleEdit", true);
+      } else {
+        this.pageNotFound = true;
+      }
     },
   },
   watch: {},

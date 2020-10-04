@@ -2,7 +2,13 @@
   <v-col>
     <v-row v-if="!$vuetify.breakpoint.mobile" class="px-5">
       <v-col cols="6" md="9" class="py-0">
-        <v-text-field flat :color="themeColor" v-model="question.question" placeholder="Question"></v-text-field>
+        <v-text-field
+          autofocus
+          flat
+          :color="themeColor"
+          v-model="question.question"
+          placeholder="Question"
+        ></v-text-field>
       </v-col>
       <v-col cols="6" md="3" class="py-0">
         <v-select
@@ -210,12 +216,12 @@
     <v-row class="px-3" :justify="!$vuetify.breakpoint.mobile ?'end': 'center'">
       <v-switch :color="themeColor" v-model="isDescription" label="Description" class="mr-5"></v-switch>
       <v-switch :color="themeColor" v-model="isRequired" label="Required" class="mr-5"></v-switch>
-      <v-switch
+      <!-- <v-switch
         v-if="['Short answer', 'Paragraph'].includes(question.answerType)"
         :color="themeColor"
         v-model="validate"
         label="Add Validation"
-      ></v-switch>
+      ></v-switch>-->
     </v-row>
   </v-col>
 </template>
@@ -226,6 +232,9 @@
 }
 .icon-align-to-textfield {
   margin-top: 3px;
+}
+.v-input--is-disabled:not(.v-input--is-readonly) {
+  pointer-events: inherit;
 }
 </style>
 
@@ -271,6 +280,7 @@ export default {
         disabled: true,
       },
     ],
+    validationTypes: ["Email", "URL", "Phone Number", "Custom type"],
     options: [],
     range: {
       lowerLimit: 0,
@@ -301,15 +311,15 @@ export default {
         (option) => option.other === true
       );
       if (otherIndex > -1) {
-        this.options[otherIndex] = {
-          rank: nextIndex,
-          name: "Option " + nextIndex,
-        };
         this.options.push({
           rank: nextIndex,
           name: "Other",
           other: true,
         });
+        this.options[otherIndex] = {
+          rank: nextIndex,
+          name: "Option " + nextIndex,
+        };
         this.optionFocusIndex = otherIndex;
       } else {
         this.options.push({
@@ -338,6 +348,11 @@ export default {
         this.otherAdded = !this.otherAdded;
       }
       this.options.splice(index, 1);
+    },
+  },
+  watch: {
+    isRequired: function (newValue) {
+      this.question.isRequired = newValue;
     },
   },
 };
