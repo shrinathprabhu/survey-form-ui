@@ -1,17 +1,23 @@
 User-agent: Googlebot
 Disallow:
+Sitemap: https://openforms.herokuapp.com/sitemap.xml
 
 User-agent: Bingbot
 Disallow:
+Sitemap: https://openforms.herokuapp.com/sitemap.xml
 
 User-agent: Slurp
 Disallow:
+Sitemap: https://openforms.herokuapp.com/sitemap.xml
 
 User-agent: DuckDuckBot
 Disallow:
+Sitemap: https://openforms.herokuapp.com/sitemap.xml
 
 User-agent: Yandex
 Disallow:
+Sitemap: https://openforms.herokuapp.com/sitemap.xml
 
 User-agent: ia_archiver
 Disallow:
+Sitemap: https://openforms.herokuapp.com/sitemap.xml
