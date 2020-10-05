@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     theme: {
       name: '',
-      value: ''
+      value: '',
+      icon: ''
     },
     dark: false,
     changeTheme: false,

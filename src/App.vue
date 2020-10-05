@@ -5,10 +5,6 @@
 </template>
 
 <style scoped>
-html,
-body {
-  font-family: "Google Sans", sans-serif;
-}
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;

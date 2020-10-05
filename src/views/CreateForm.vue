@@ -3,12 +3,16 @@
     <v-main>
       <v-container fill-height>
         <v-col justify="center" align="center">
-          <v-progress-circular :color="themeColor" indeterminate rotate size="90" width="5"></v-progress-circular>
-          <v-row
-            justify="center"
-            align="center"
-            class="mt-3 pt-3"
-          >Creating a new form. Please wait{{loadingDots}}</v-row>
+          <v-progress-circular
+            :color="themeColor"
+            indeterminate
+            rotate
+            size="90"
+            width="5"
+          ></v-progress-circular>
+          <v-row justify="center" align="center" class="mt-3 pt-3"
+            >Creating a new form. Please wait{{ loadingDots }}</v-row
+          >
         </v-col>
       </v-container>
     </v-main>
@@ -16,10 +20,8 @@
 </template>
 
 <script>
-import ThemeMixin from "../mixins/ThemeMixin";
 export default {
   name: "CreateForm",
-  mixins: [ThemeMixin],
   data: () => ({
     loadingDots: ".  ",
   }),
