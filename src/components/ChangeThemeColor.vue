@@ -15,8 +15,11 @@
           x-small
           :color="color.value"
           @click.stop="changeThemeColor(color)"
+          :aria-label="color.name"
         >
-          <v-icon v-if="color.value === themeColor" style="color: white">mdi-check</v-icon>
+          <v-icon v-if="color.value === themeColor" style="color: white"
+            >mdi-check</v-icon
+          >
         </v-btn>
       </v-col>
     </v-row>

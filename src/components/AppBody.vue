@@ -3,12 +3,16 @@
     <v-col class="custom-container">
       <v-row>
         <v-card shaped class="form-card" to="/forms/create" elevation="5">
-          <v-row align="center" justify="center" style="height: 205px;">
+          <v-row align="center" justify="center" style="height: 205px">
             <v-col>
               <v-row align="center" justify="center">
-                <v-icon style="font-size:80px" :color="themeColor">mdi-plus</v-icon>
+                <v-icon style="font-size: 80px" :color="themeColor"
+                  >mdi-plus</v-icon
+                >
               </v-row>
-              <v-row align="center" justify="center" class="mt-2">Create new form</v-row>
+              <v-row align="center" justify="center" class="mt-2"
+                >Create new form</v-row
+              >
             </v-col>
           </v-row>
         </v-card>
@@ -20,12 +24,16 @@
           :to="'/forms/' + form.id + '/edit'"
           elevation="5"
         >
-          <v-row align="center" justify="center" style="height: 205px;">
+          <v-row align="center" justify="center" style="height: 205px">
             <v-col>
               <v-row align="center" justify="center">
-                <v-icon style="font-size:80px" :color="themeColor">mdi-pencil-box-outline</v-icon>
+                <v-icon style="font-size: 80px" :color="themeColor"
+                  >mdi-pencil-box-outline</v-icon
+                >
               </v-row>
-              <v-row align="center" justify="center" class="mt-2">{{form.title}}</v-row>
+              <v-row align="center" justify="center" class="mt-2">{{
+                form.title
+              }}</v-row>
             </v-col>
           </v-row>
         </v-card>
@@ -42,7 +50,7 @@
   cursor: pointer;
 }
 .custom-container {
-  padding-top: 60px;
+  padding-top: 20px;
   padding-left: 60px;
   padding-right: 60px;
 }
@@ -54,7 +62,7 @@
     cursor: pointer;
   }
   .custom-container {
-    padding-top: 60px;
+    padding-top: 20px;
     padding-left: 0px;
     padding-right: 0px;
   }
@@ -63,6 +71,7 @@
 
 <script>
 import ThemeMixin from "../mixins/ThemeMixin";
+import DB from "../utils/db";
 export default {
   name: "AppBody",
   mixins: [ThemeMixin],
@@ -70,9 +79,11 @@ export default {
     forms: [],
   }),
   mounted: async function () {
-    let forms = await this.fetchForms();
-    console.log(forms);
-    this.forms = [...this.forms, ...forms.list];
+    let localForms = await DB.fetchForms();
+    this.forms = localForms || [];
+    let remoteForms = await this.fetchForms();
+    await DB.saveForms(remoteForms.list);
+    this.forms = [...remoteForms.list];
   },
   methods: {
     async fetchForms() {
