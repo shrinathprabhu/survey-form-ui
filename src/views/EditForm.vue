@@ -4,8 +4,15 @@
   </div>
   <div v-else>
     <v-app>
-      <AppBar />
+      <AppBar
+        @save="saveForm('click')"
+        @publish="publishForm"
+        @preview="preview"
+      />
       <v-main>
+        <v-snackbar v-model="snackbar" :timeout="timeout" top rounded="pill">
+          <div class="text-center">{{ snackbarText }}</div>
+        </v-snackbar>
         <FormBody :formDetails="formDetails" />
         <!-- <QuestionComponent  /> -->
       </v-main>
@@ -31,6 +38,9 @@ export default {
     formDetails: {},
     pageNotFound: false,
     dialog: false,
+    snackbar: false,
+    timeout: 0,
+    snackbarText: "",
   }),
   created: async function () {
     window.addEventListener("popstate", this.handleBackButton);
@@ -48,17 +58,8 @@ export default {
   methods: {
     autoSave() {
       setInterval(async () => {
-        let formId = this.formDetails.id;
-        let response = await this.axios.put(
-          `${process.env.VUE_APP_BASE_URL}/forms/${formId}/save`,
-          this.formDetails
-        );
-        if (response.data && response.data.data) {
-          // Do nothing
-        } else {
-          this.pageNotFound = true;
-        }
-      }, 5000);
+        // this.saveForm('auto');
+      }, 3000);
     },
     handleBackButton() {},
     async fetchForm() {
@@ -73,6 +74,37 @@ export default {
         this.pageNotFound = true;
       }
     },
+    async saveForm() {
+      this.snackbarText = "Saving the form state...";
+      this.snackbar = true;
+      this.timeout = 15000;
+      setTimeout(() => {
+        this.snackbarText = "Form state saved";
+        this.snackbar = 1500;
+      }, 2000);
+      console.log("Form details", this.formDetails);
+      // let formId = this.formDetails.id;
+      // let response = await this.axios.put(
+      //   `${process.env.VUE_APP_BASE_URL}/forms/${formId}/save`,
+      //   this.formDetails
+      // );
+      // if (response.data && response.data.data) {
+      //   // Do nothing
+      // } else {
+      //   this.pageNotFound = true;
+      // }
+    },
+    async publishForm() {
+      this.snackbarText = "Publishing form to the web...";
+      this.snackbar = true;
+      this.timeout = 15000;
+      setTimeout(() => {
+        this.snackbarText = "Form published";
+        this.snackbar = 1500;
+      }, 2000);
+      console.log("Form details", this.formDetails);
+    },
+    preview() {},
   },
   watch: {},
 };

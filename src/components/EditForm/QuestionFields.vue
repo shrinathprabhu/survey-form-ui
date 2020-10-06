@@ -499,7 +499,7 @@ export default {
     },
   },
   watch: {
-    isRequired: function (newValue) {
+    isRequired(newValue) {
       this.question.isRequired = newValue;
     },
   },

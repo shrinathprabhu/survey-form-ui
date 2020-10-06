@@ -26,7 +26,7 @@
               icon
               v-bind="attrs"
               v-on="on"
-              @click.left="changeTheme = true"
+              @click.stop="emitState('preview')"
               aria-label="Click to preview"
             >
               <v-icon>mdi-eye-outline</v-icon>
@@ -42,7 +42,7 @@
               icon
               v-bind="attrs"
               v-on="on"
-              @click.left="changeTheme = true"
+              @click.stop="emitState('save')"
               aria-label="Save changes"
             >
               <v-icon>mdi-content-save-outline</v-icon>
@@ -58,7 +58,7 @@
               icon
               v-bind="attrs"
               v-on="on"
-              @click.left="changeTheme = true"
+              @click.stop="emitState('publish')"
               aria-label="Publish form to the web"
             >
               <v-icon>mdi-publish</v-icon>
@@ -74,7 +74,7 @@
               icon
               v-bind="attrs"
               v-on="on"
-              @click.left="changeTheme = true"
+              @click.stop="changeTheme = true"
               aria-label="Change Theme - Change color and light mode of the app"
             >
               <v-icon>mdi-palette-outline</v-icon>
@@ -174,12 +174,15 @@ export default {
     navigateToHome() {
       this.$router.push("/");
     },
+    emitState(type) {
+      this.$emit(type);
+    },
   },
   computed: {
-    appBarTitle: () => {
+    appBarTitle() {
       return store.state.appBarTitle;
     },
-    canEdit: () => {
+    canEdit() {
       return store.state.canEdit;
     },
   },

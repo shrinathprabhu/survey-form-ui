@@ -125,7 +125,7 @@ export default {
   components: { QuestionFields },
   props: ["formDetails"],
   computed: {
-    fieldsLoading: function () {
+    fieldsLoading() {
       return this.formDetails ? false : true;
     },
   },
