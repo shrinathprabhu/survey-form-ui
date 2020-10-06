@@ -86,7 +86,7 @@
     </v-app-bar>
     <v-navigation-drawer
       v-if="!$vuetify.breakpoint.mobile"
-      absolute
+      fixed
       temporary
       right
       v-model="changeTheme"
