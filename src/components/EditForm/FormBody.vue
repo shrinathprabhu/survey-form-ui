@@ -20,17 +20,20 @@
       <v-tab-item>
         <QuestionComponent :formDetails="formDetails" />
       </v-tab-item>
-      <v-tab-item>Hello</v-tab-item>
+      <v-tab-item>
+        <ResponsesComponent />
+      </v-tab-item>
     </v-tabs-items>
   </v-container>
 </template>
 
 <script>
 import ThemeMixin from "../../mixins/ThemeMixin";
-import QuestionComponent from "../../components/EditForm/QuestionComponent";
+import QuestionComponent from "./QuestionComponent";
+import ResponsesComponent from "./ResponsesComponent";
 export default {
   name: "FormBody",
-  components: { QuestionComponent },
+  components: { QuestionComponent, ResponsesComponent },
   mixins: [ThemeMixin],
   props: ["formDetails"],
   data: () => ({
