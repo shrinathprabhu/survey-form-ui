@@ -42,6 +42,10 @@
             :question="question"
             :index="index"
             @remove="removeQuestion"
+            @move="moveQuestion"
+            :isLastEl="
+              index === formDetails.questionnaires.length - 1 ? true : false
+            "
           />
         </v-card>
       </v-col>
@@ -145,6 +149,19 @@ export default {
     },
     removeQuestion(e) {
       this.formDetails.questionnaires.splice(e.index, 1);
+    },
+    moveQuestion(e) {
+      let questionnaires = this.formDetails.questionnaires;
+      if (e.type === "up") {
+        let temp = questionnaires[e.index];
+        questionnaires[e.index] = questionnaires[e.index - 1];
+        questionnaires[e.index - 1] = temp;
+      } else {
+        let temp = questionnaires[e.index];
+        questionnaires[e.index] = questionnaires[e.index + 1];
+        questionnaires[e.index + 1] = temp;
+      }
+      this.formDetails.questionnaires = [...questionnaires];
     },
   },
   watch: {

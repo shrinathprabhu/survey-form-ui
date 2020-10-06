@@ -330,6 +330,8 @@
             ripple
             style="cursor: pointer"
             aria-label="Move the field up"
+            @click.stop="move('up')"
+            :disabled="index === 0"
           >
             <v-icon :color="themeColor" class="mr-2"
               >mdi-arrow-up-drop-circle</v-icon
@@ -340,6 +342,8 @@
             ripple
             style="cursor: pointer"
             aria-label="Move the field down"
+            @click.stop="move('down')"
+            :disabled="isLastEl"
           >
             <v-icon :color="themeColor" class="mr-2"
               >mdi-arrow-down-drop-circle</v-icon
@@ -381,7 +385,7 @@ import ThemeMixin from "../../mixins/ThemeMixin";
 // import formStore from "../../store/form";
 export default {
   name: "QuestionFields",
-  props: ["question", "index"],
+  props: ["question", "index", "isLastEl"],
   mixins: [ThemeMixin],
   data: () => ({
     otherAdded: false,
@@ -489,6 +493,9 @@ export default {
     },
     deleteField() {
       this.$emit("remove", { index: this.index, question: this.question });
+    },
+    move(type) {
+      this.$emit("move", { index: this.index, question: this.question, type });
     },
   },
   watch: {
