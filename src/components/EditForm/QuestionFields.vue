@@ -20,19 +20,28 @@
           :item-color="themeColor"
         >
           <template v-slot:selection="data">
-            <v-icon :color="themeColor" class="px-2">{{data.item.icon}}</v-icon>
-            <span>{{data.item.value}}</span>
+            <v-icon :color="themeColor" class="px-2">{{
+              data.item.icon
+            }}</v-icon>
+            <span>{{ data.item.value }}</span>
           </template>
           <template v-slot:item="data">
-            <v-icon :color="themeColor" class="px-2">{{data.item.icon}}</v-icon>
-            <span>{{data.item.value}}</span>
+            <v-icon :color="themeColor" class="px-2">{{
+              data.item.icon
+            }}</v-icon>
+            <span>{{ data.item.value }}</span>
           </template>
         </v-select>
       </v-col>
     </v-row>
     <v-row v-else class="px-8">
       <v-row>
-        <v-text-field flat :color="themeColor" v-model="question.question" placeholder="Question"></v-text-field>
+        <v-text-field
+          flat
+          :color="themeColor"
+          v-model="question.question"
+          placeholder="Question"
+        ></v-text-field>
       </v-row>
       <v-row>
         <v-select
@@ -44,17 +53,24 @@
           :item-color="themeColor"
         >
           <template v-slot:selection="data">
-            <v-icon :color="themeColor" class="px-2">{{data.item.icon}}</v-icon>
-            <span>{{data.item.value}}</span>
+            <v-icon :color="themeColor" class="px-2">{{
+              data.item.icon
+            }}</v-icon>
+            <span>{{ data.item.value }}</span>
           </template>
           <template v-slot:item="data">
-            <v-icon :color="themeColor" class="px-2">{{data.item.icon}}</v-icon>
-            <span>{{data.item.value}}</span>
+            <v-icon :color="themeColor" class="px-2">{{
+              data.item.icon
+            }}</v-icon>
+            <span>{{ data.item.value }}</span>
           </template>
         </v-select>
       </v-row>
     </v-row>
-    <v-row :class="$vuetify.breakpoint.mobile ? 'px-2 mx-1' : 'px-3 mx-2'" v-if="isDescription">
+    <v-row
+      :class="$vuetify.breakpoint.mobile ? 'px-2 mx-1' : 'px-3 mx-2'"
+      v-if="isDescription"
+    >
       <v-text-field
         flat
         :color="themeColor"
@@ -63,16 +79,29 @@
       ></v-text-field>
     </v-row>
     <v-row :class="$vuetify.breakpoint.mobile ? 'px-2' : 'px-5'">
-      <v-col cols="9" class="py-0" v-if="question.answerType === 'Short answer'">
+      <v-col
+        cols="9"
+        class="py-0"
+        v-if="question.answerType === 'Short answer'"
+      >
         <v-text-field placeholder="Short answer" disabled></v-text-field>
       </v-col>
       <v-col cols="12" class="py-0" v-if="question.answerType === 'Paragraph'">
-        <v-textarea placeholder="Paragraph" disabled no-resize rows="2"></v-textarea>
+        <v-textarea
+          placeholder="Paragraph"
+          disabled
+          no-resize
+          rows="2"
+        ></v-textarea>
       </v-col>
       <v-col
-        :cols="$vuetify.breakpoint.mobile ? 12 :10"
+        :cols="$vuetify.breakpoint.mobile ? 12 : 10"
         class="px-5"
-        v-if="['Multiple choice', 'Checkbox', 'Dropdown'].includes(question.answerType)"
+        v-if="
+          ['Multiple choice', 'Checkbox', 'Dropdown'].includes(
+            question.answerType
+          )
+        "
       >
         <v-row v-for="(option, index) in options" :key="index">
           <v-text-field
@@ -84,17 +113,30 @@
           >
             <template v-slot:prepend>
               <v-icon
-                v-if="question.answerType === 'Multiple choice' || question.answerType === 'Checkbox'"
+                v-if="
+                  question.answerType === 'Multiple choice' ||
+                  question.answerType === 'Checkbox'
+                "
                 class="ml-1 icon-align-to-textfield"
-              >{{question.answerType === 'Multiple choice' ? 'mdi-radiobox-blank' : 'mdi-checkbox-blank-outline'}}</v-icon>
+                >{{
+                  question.answerType === "Multiple choice"
+                    ? "mdi-radiobox-blank"
+                    : "mdi-checkbox-blank-outline"
+                }}</v-icon
+              >
               <span
                 v-if="question.answerType === 'Dropdown'"
                 class="mt-1 mx-1"
                 style="font-size: 1.3em"
-              >{{(index+1)}}.</span>
+                >{{ index + 1 }}.</span
+              >
             </template>
             <template v-slot:append-outer>
-              <v-tooltip content-class="small-tooltip" v-if="options.length > 1" bottom>
+              <v-tooltip
+                content-class="small-tooltip"
+                v-if="options.length > 1"
+                bottom
+              >
                 <template v-slot:activator="{ on, attrs }">
                   <v-icon
                     class="icon-align-to-textfield"
@@ -102,7 +144,8 @@
                     v-on="on"
                     icon
                     @click.stop="removeOption(index)"
-                  >mdi-close</v-icon>
+                    >mdi-close</v-icon
+                  >
                 </template>
                 <span>Remove option</span>
               </v-tooltip>
@@ -110,8 +153,17 @@
           </v-text-field>
         </v-row>
         <v-row v-if="!$vuetify.breakpoint.mobile">
-          <v-btn text link :color="themeColor" class="mr-1" @click.stop="addOption()">Add option</v-btn>
-          <span class="mx-1" style="margin-top: 6px" v-if="!otherAdded">OR</span>
+          <v-btn
+            text
+            link
+            :color="themeColor"
+            class="mr-1"
+            @click.stop="addOption()"
+            >Add option</v-btn
+          >
+          <span class="mx-1" style="margin-top: 6px" v-if="!otherAdded"
+            >OR</span
+          >
           <v-btn
             v-if="!otherAdded"
             text
@@ -119,11 +171,14 @@
             :color="themeColor"
             class="ml-1"
             @click.stop="addOther()"
-          >add "Other"</v-btn>
+            >add "Other"</v-btn
+          >
         </v-row>
         <v-col v-else style="width: 100%">
           <v-row align="center" justify="center">
-            <v-btn text link :color="themeColor" @click.stop="addOption()">Add option</v-btn>
+            <v-btn text link :color="themeColor" @click.stop="addOption()"
+              >Add option</v-btn
+            >
           </v-row>
           <v-row align="center" justify="center">
             <span class="ma-1" v-if="!otherAdded">OR</span>
@@ -135,7 +190,8 @@
               link
               :color="themeColor"
               @click.stop="addOther()"
-            >add "Other"</v-btn>
+              >add "Other"</v-btn
+            >
           </v-row>
         </v-col>
       </v-col>
@@ -172,10 +228,17 @@
             ></v-text-field>
           </v-col>
           <v-col>
-            <v-switch :color="themeColor" v-model="range.single" label="Switch to single mode"></v-switch>
+            <v-switch
+              :color="themeColor"
+              v-model="range.single"
+              label="Switch to single mode"
+            ></v-switch>
           </v-col>
         </v-row>
-        <v-layout :row="!$vuetify.breakpoint.mobile" :column="$vuetify.breakpoint.mobile">
+        <v-layout
+          :row="!$vuetify.breakpoint.mobile"
+          :column="$vuetify.breakpoint.mobile"
+        >
           <span class="mt-1 mx-2">Sample Range Slider:</span>
           <v-slider
             :color="themeColor"
@@ -202,26 +265,101 @@
         class="py-0"
         v-if="question.answerType === 'Date'"
       >
-        <v-text-field disabled label="Month, day, year" append-icon="mdi-calendar" readonly></v-text-field>
+        <v-text-field
+          disabled
+          label="Month, day, year"
+          append-icon="mdi-calendar"
+          readonly
+        ></v-text-field>
       </v-col>
       <v-col
         :cols="$vuetify.breakpoint.mobile ? '8' : '2'"
         class="py-0"
         v-if="question.answerType === 'Time'"
       >
-        <v-text-field disabled label="Time" append-icon="mdi-timer" readonly></v-text-field>
+        <v-text-field
+          disabled
+          label="Time"
+          append-icon="mdi-timer"
+          readonly
+        ></v-text-field>
       </v-col>
     </v-row>
     <v-divider class="mt-2"></v-divider>
-    <v-row class="px-3" :justify="!$vuetify.breakpoint.mobile ?'end': 'center'">
-      <v-switch :color="themeColor" v-model="isDescription" label="Description" class="mr-5"></v-switch>
-      <v-switch :color="themeColor" v-model="isRequired" label="Required" class="mr-5"></v-switch>
+    <v-row
+      class="px-3"
+      :justify="!$vuetify.breakpoint.mobile ? 'end' : 'center'"
+    >
+      <v-switch
+        :color="themeColor"
+        v-model="isDescription"
+        label="Description"
+        class="mr-5"
+        aria-label="Enable Description"
+      ></v-switch>
+      <v-switch
+        :color="themeColor"
+        v-model="isRequired"
+        label="Required"
+        class="mr-5"
+        aria-label="Make this field required"
+      ></v-switch>
       <!-- <v-switch
         v-if="['Short answer', 'Paragraph'].includes(question.answerType)"
         :color="themeColor"
         v-model="validate"
         label="Add Validation"
-      ></v-switch>-->
+        aria-label="Add Validation to this field"
+      ></v-switch> -->
+      <v-menu top close-on-click>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            icon
+            color="grey"
+            dark
+            v-bind="attrs"
+            v-on="on"
+            aria-label="Options for this field"
+            class="mr-3 mt-3"
+          >
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item
+            ripple
+            style="cursor: pointer"
+            aria-label="Move the field up"
+          >
+            <v-icon :color="themeColor" class="mr-2"
+              >mdi-arrow-up-drop-circle</v-icon
+            >
+            Move Up
+          </v-list-item>
+          <v-list-item
+            ripple
+            style="cursor: pointer"
+            aria-label="Move the field down"
+          >
+            <v-icon :color="themeColor" class="mr-2"
+              >mdi-arrow-down-drop-circle</v-icon
+            >
+
+            Move Down
+          </v-list-item>
+          <v-list-item
+            ripple
+            style="cursor: pointer"
+            aria-label="Delete field"
+            @click.stop="deleteField"
+          >
+            <v-icon :color="themeColor" class="mr-2">mdi-delete</v-icon>
+            Delete
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </v-row>
+    <v-row class="px-3" justify="end" v-if="$vuetify.breakpoint.mobile">
     </v-row>
   </v-col>
 </template>
@@ -243,7 +381,7 @@ import ThemeMixin from "../../mixins/ThemeMixin";
 // import formStore from "../../store/form";
 export default {
   name: "QuestionFields",
-  props: ["question"],
+  props: ["question", "index"],
   mixins: [ThemeMixin],
   data: () => ({
     otherAdded: false,
@@ -348,6 +486,9 @@ export default {
         this.otherAdded = !this.otherAdded;
       }
       this.options.splice(index, 1);
+    },
+    deleteField() {
+      this.$emit("remove", { index: this.index, question: this.question });
     },
   },
   watch: {

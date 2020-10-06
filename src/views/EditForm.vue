@@ -6,8 +6,8 @@
     <v-app>
       <AppBar />
       <v-main>
-        <FormBody />
-        <QuestionComponent :formDetails="formDetails" />
+        <FormBody :formDetails="formDetails" />
+        <!-- <QuestionComponent  /> -->
       </v-main>
     </v-app>
   </div>
@@ -16,7 +16,7 @@
 <script>
 import AppBar from "../components/AppBar";
 import FormBody from "../components/EditForm/FormBody";
-import QuestionComponent from "../components/EditForm/QuestionComponent";
+// import QuestionComponent from "../components/EditForm/QuestionComponent";
 import PageNotFound from "./PageNotFound";
 import store from "../store";
 export default {
@@ -24,7 +24,7 @@ export default {
   components: {
     AppBar,
     FormBody,
-    QuestionComponent,
+    // QuestionComponent,
     PageNotFound,
   },
   data: () => ({

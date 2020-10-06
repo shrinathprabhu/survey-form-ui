@@ -36,9 +36,13 @@
           class="mt-3 mb-3"
           v-for="(question, index) in formDetails.questionnaires"
           :key="index"
-          :id="'question'+index"
+          :id="'question' + index"
         >
-          <QuestionFields :question="question" />
+          <QuestionFields
+            :question="question"
+            :index="index"
+            @remove="removeQuestion"
+          />
         </v-card>
       </v-col>
       <!-- <v-layout row wrap> -->
@@ -47,7 +51,13 @@
           <v-row class="py-1">
             <v-tooltip bottom content-class="small-tooltip">
               <template v-slot:activator="{ on, attrs }">
-                <v-btn v-bind="attrs" v-on="on" icon elevation="0" @click.stop="addQuestion()">
+                <v-btn
+                  v-bind="attrs"
+                  v-on="on"
+                  icon
+                  elevation="0"
+                  @click.stop="addQuestion"
+                >
                   <v-icon>mdi-plus-circle-outline</v-icon>
                 </v-btn>
               </template>
@@ -117,7 +127,7 @@ export default {
   },
   data: () => ({}),
   methods: {
-    addQuestion: function () {
+    addQuestion() {
       this.formDetails = this.formDetails || {};
       this.formDetails.questionnaires = this.formDetails.questionnaires || [];
       this.formDetails.questionnaires.push({
@@ -130,8 +140,11 @@ export default {
         document.getElementById(refName).scrollIntoView({ behavior: "smooth" });
       });
     },
-    moveToDescription: function () {
+    moveToDescription() {
       this.$refs.description.focus();
+    },
+    removeQuestion(e) {
+      this.formDetails.questionnaires.splice(e.index, 1);
     },
   },
   watch: {

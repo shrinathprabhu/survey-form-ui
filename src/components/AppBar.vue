@@ -2,7 +2,6 @@
   <div>
     <v-app-bar
       shrink-on-scroll
-      hide-on-scroll
       prominent
       app
       fixed
@@ -15,6 +14,8 @@
         max-width="35"
         class="mt-2 mr-2"
         contain
+        style="cursor: pointer"
+        @click.stop="navigateToHome"
       ></v-img>
       <v-toolbar-title>{{ appBarTitle }}</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -169,7 +170,11 @@ export default {
     ChangeThemeMode,
   },
   data: () => ({}),
-  methods: {},
+  methods: {
+    navigateToHome() {
+      this.$router.push("/");
+    },
+  },
   computed: {
     appBarTitle: () => {
       return store.state.appBarTitle;
