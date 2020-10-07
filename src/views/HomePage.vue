@@ -1,12 +1,10 @@
 <template>
-  <keep-alive>
-    <v-app>
-      <AppBar />
-      <v-main>
-        <AppBody />
-      </v-main>
-    </v-app>
-  </keep-alive>
+  <v-app>
+    <AppBar />
+    <v-main>
+      <AppBody />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
