@@ -2,23 +2,17 @@
   <v-container>
     <v-tabs :color="themeColor" centered v-model="tab">
       <v-tab>Questions</v-tab>
-      <v-tooltip
-        v-if="!formDetails.isPublished"
-        content-class="small-tooltip"
-        bottom
-      >
-        <template v-slot:activator="{ on, attrs }">
-          <v-tab v-bind="attrs" v-on="on">Responses</v-tab>
-        </template>
-        <span>Publish the form to start getting responses</span>
-      </v-tooltip>
+      <v-tab>Responses</v-tab>
       <v-tab v-if="formDetails.isPublished" v-bind="attrs" v-on="on"
         >Responses</v-tab
       >
     </v-tabs>
     <v-tabs-items v-model="tab">
       <v-tab-item>
-        <QuestionComponent :formDetails="formDetails" />
+        <QuestionComponent
+          :formDetails="formDetails"
+          @auto-save-state-change="autoSave"
+        />
       </v-tab-item>
       <v-tab-item>
         <ResponsesComponent />
@@ -39,11 +33,12 @@ export default {
   data: () => ({
     tab: "questions",
   }),
-  mounted: async function () {
-    let id = this.$route.params.id;
-    console.log(id);
+  mounted: async function () {},
+  methods: {
+    autoSave() {
+      this.$emit("auto-save-state-change");
+    },
   },
-  methods: {},
 
   computed: {},
 };

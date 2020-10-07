@@ -3,7 +3,7 @@
     <v-row>
       <v-col class="mr-1">
         <v-card shaped elevation="2" outlined class="pb-5 mb-5">
-          <v-col class="px-6" style="padding-bottom: 0">
+          <v-col class="px-6">
             <v-text-field
               flat
               v-model="formDetails.title"
@@ -14,7 +14,6 @@
               single-line
               hide-details
               @keypress.enter="moveToDescription"
-              autofocus
             ></v-text-field>
           </v-col>
           <v-col class="px-6">
@@ -43,6 +42,7 @@
             :index="index"
             @remove="removeQuestion"
             @move="moveQuestion"
+            @auto-save-state-change="autoSave"
             :isLastEl="
               index === formDetails.questionnaires.length - 1 ? true : false
             "
@@ -108,7 +108,16 @@
 <style scoped>
 .form-title {
   font-size: 36px;
+  line-height: 1.33333;
+  padding-bottom: 10px;
+  max-height: 40px !important;
 }
+
+/* .form-title input {
+  font-size: 36px;
+  line-height: 1.33333;
+  max-height: 40px !important;
+} */
 
 .small-tooltip {
   font-size: 0.7em;
@@ -124,6 +133,9 @@ export default {
   mixins: [ThemeMixin],
   components: { QuestionFields },
   props: ["formDetails"],
+  updated: function () {
+    this.autoSave();
+  },
   computed: {
     fieldsLoading() {
       return this.formDetails ? false : true;
@@ -162,6 +174,9 @@ export default {
         questionnaires[e.index + 1] = temp;
       }
       this.formDetails.questionnaires = [...questionnaires];
+    },
+    autoSave() {
+      this.$emit("auto-save-state-change");
     },
   },
   watch: {

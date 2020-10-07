@@ -311,7 +311,7 @@
         label="Add Validation"
         aria-label="Add Validation to this field"
       ></v-switch> -->
-      <v-menu top close-on-click>
+      <v-menu top close-on-click close-on-content-click>
         <template v-slot:activator="{ on, attrs }">
           <v-btn
             icon
@@ -445,6 +445,9 @@ export default {
     } else {
       this.options = this.options.sort((o1, o2) => o1.rank - o2.rank);
     }
+  },
+  updated: function () {
+    this.$emit("auto-save-state-change");
   },
   methods: {
     addOption() {

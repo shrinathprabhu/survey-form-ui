@@ -1,6 +1,11 @@
 <template>
   <transition name="fade">
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+      <v-snackbar v-model="offline">
+        Seems like you're currently offline. Check network
+      </v-snackbar>
+    </keep-alive>
   </transition>
 </template>
 
@@ -19,9 +24,16 @@ export default {
   name: "App",
   components: {},
   mixins: [],
-  data: () => ({}),
+  data: () => ({
+    offline: false,
+  }),
   methods: {},
   computed: {},
-  mounted: function () {},
+  mounted: function () {
+    window.addEventListener("offline", function () {
+      this.offline = true;
+    });
+  },
+  watch: {},
 };
 </script>

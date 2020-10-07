@@ -1,8 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import HomePage from '../views/HomePage';
-import PageNotFound from '../views/PageNotFound';
-import SomethingWentWrong from '../views/SomethingWentWrong';
 import store from '../store';
 
 Vue.use(VueRouter);
@@ -28,14 +26,19 @@ const routes = [
     component: () => import(/* webpackChunkName: "edit-form" */ '../views/EditForm.vue')
   },
   {
+    path: '/forms/:id/preview',
+    name: 'FormPreview',
+    component: () => import(/* webpackChunkName: "form-preview" */ '../views/FormPreview.vue')
+  },
+  {
     path: '/404',
     name: 'PageNotFound',
-    component: PageNotFound
+    component: import(/* webpackChunkName: "page-not-found" */ '../views/PageNotFound.vue')
   },
   {
     path: '/500',
     name: 'SomethingWentWrong',
-    component: SomethingWentWrong
+    component: import(/* webpackChunkName: "something-went-wrong" */ '../views/SomethingWentWrong.vue')
   },
   {
     path: '*',

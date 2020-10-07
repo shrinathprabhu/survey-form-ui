@@ -10,10 +10,19 @@
         @preview="preview"
       />
       <v-main>
-        <v-snackbar v-model="snackbar" :timeout="timeout" top rounded="pill">
+        <v-snackbar
+          v-model="snackbar"
+          :timeout="timeout"
+          top
+          rounded="pill"
+          transition="v-fade-transition"
+        >
           <div class="text-center">{{ snackbarText }}</div>
         </v-snackbar>
-        <FormBody :formDetails="formDetails" />
+        <FormBody
+          :formDetails="formDetails"
+          @auto-save-state-change="autoSave()"
+        />
         <!-- <QuestionComponent  /> -->
       </v-main>
     </v-app>
@@ -24,6 +33,7 @@
 import AppBar from "../components/AppBar";
 import FormBody from "../components/EditForm/FormBody";
 // import QuestionComponent from "../components/EditForm/QuestionComponent";
+import { debounce } from "lodash";
 import PageNotFound from "./PageNotFound";
 import store from "../store";
 export default {
@@ -39,29 +49,20 @@ export default {
     pageNotFound: false,
     dialog: false,
     snackbar: false,
-    timeout: 0,
+    timeout: -1,
     snackbarText: "",
   }),
   created: async function () {
-    window.addEventListener("popstate", this.handleBackButton);
     await this.fetchForm();
-    // this.autoSave();
   },
-  mounted: async function () {
-    // window.addEventListener("hashchange", this.handleBackButton, false);
-    // await this.fetchForm();
-    this.autoSave();
-  },
+  mounted: async function () {},
   beforeDestroy: function () {
-    // window.removeEventListener("hashchange", this.handleBackButton);
+    this.saveForm("auto");
   },
   methods: {
-    autoSave() {
-      setInterval(async () => {
-        // this.saveForm('auto');
-      }, 3000);
-    },
-    handleBackButton() {},
+    autoSave: debounce(function () {
+      this.saveForm("auto");
+    }, 5000),
     async fetchForm() {
       let response = await this.axios.get(
         process.env.VUE_APP_BASE_URL + "/forms/" + this.$route.params.id
@@ -74,25 +75,24 @@ export default {
         this.pageNotFound = true;
       }
     },
-    async saveForm() {
-      this.snackbarText = "Saving the form state...";
+    async saveForm(type) {
+      this.snackbarText =
+        type === "click"
+          ? "Saving the form state..."
+          : "Auto-saving the form state...";
       this.snackbar = true;
       this.timeout = 15000;
-      setTimeout(() => {
+      let formId = this.formDetails.id;
+      let response = await this.axios.put(
+        `${process.env.VUE_APP_BASE_URL}/forms/${formId}/save`,
+        this.formDetails
+      );
+      if (response.data && response.data.data) {
         this.snackbarText = "Form state saved";
-        this.snackbar = 1500;
-      }, 2000);
-      console.log("Form details", this.formDetails);
-      // let formId = this.formDetails.id;
-      // let response = await this.axios.put(
-      //   `${process.env.VUE_APP_BASE_URL}/forms/${formId}/save`,
-      //   this.formDetails
-      // );
-      // if (response.data && response.data.data) {
-      //   // Do nothing
-      // } else {
-      //   this.pageNotFound = true;
-      // }
+      } else {
+        this.snackbarText = "Failed to save the form state";
+      }
+      this.timeout = 2000;
     },
     async publishForm() {
       this.snackbarText = "Publishing form to the web...";
@@ -100,7 +100,7 @@ export default {
       this.timeout = 15000;
       setTimeout(() => {
         this.snackbarText = "Form published";
-        this.snackbar = 1500;
+        this.timeout = 2000;
       }, 2000);
       console.log("Form details", this.formDetails);
     },
