@@ -1,11 +1,6 @@
 <template>
   <transition name="fade">
-    <keep-alive>
-      <router-view></router-view>
-      <v-snackbar v-model="offline">
-        Seems like you're currently offline. Check network
-      </v-snackbar>
-    </keep-alive>
+    <router-view></router-view>
   </transition>
 </template>
 
