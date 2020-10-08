@@ -23,8 +23,8 @@
 
 <script>
 import ThemeMixin from "../../mixins/ThemeMixin";
-import QuestionComponent from "./QuestionComponent";
-import ResponsesComponent from "./ResponsesComponent";
+import QuestionComponent from "./QuestionComponent.vue";
+import ResponsesComponent from "./ResponsesComponent.vue";
 export default {
   name: "FormBody",
   components: { QuestionComponent, ResponsesComponent },

@@ -160,8 +160,8 @@
 <script>
 import ThemeMixin from "../mixins/ThemeMixin";
 import store from "../store";
-import ChangeThemeColor from "../components/ChangeThemeColor";
-import ChangeThemeMode from "../components/ChangeThemeMode";
+import ChangeThemeColor from "../components/ChangeThemeColor.vue";
+import ChangeThemeMode from "../components/ChangeThemeMode.vue";
 export default {
   name: "AppBar",
   mixins: [ThemeMixin],

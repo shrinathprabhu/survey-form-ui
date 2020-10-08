@@ -30,11 +30,10 @@
 </template>
 
 <script>
-import AppBar from "../components/AppBar";
-import FormBody from "../components/EditForm/FormBody";
-// import QuestionComponent from "../components/EditForm/QuestionComponent";
 import { debounce } from "lodash";
-import PageNotFound from "./PageNotFound";
+import AppBar from "../components/AppBar.vue";
+import FormBody from "../components/EditForm/FormBody.vue";
+import PageNotFound from "./PageNotFound.vue";
 import store from "../store";
 export default {
   name: "EditForm",

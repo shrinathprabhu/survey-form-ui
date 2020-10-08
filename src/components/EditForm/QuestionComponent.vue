@@ -8,7 +8,7 @@
               flat
               v-model="formDetails.title"
               :color="themeColor"
-              height="50px"
+              height="50"
               :loading="fieldsLoading"
               class="form-title"
               single-line
@@ -108,16 +108,7 @@
 <style scoped>
 .form-title {
   font-size: 36px;
-  line-height: 1.33333;
-  padding-bottom: 10px;
-  max-height: 40px !important;
 }
-
-/* .form-title input {
-  font-size: 36px;
-  line-height: 1.33333;
-  max-height: 40px !important;
-} */
 
 .small-tooltip {
   font-size: 0.7em;
@@ -126,7 +117,7 @@
 
 <script>
 import ThemeMixin from "../../mixins/ThemeMixin";
-import QuestionFields from "./QuestionFields";
+import QuestionFields from "./QuestionFields.vue";
 import store from "../../store";
 export default {
   name: "QuestionComponent",

@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import AppBar from "../components/AppBar";
-import AppBody from "../components/AppBody";
+import AppBar from "../components/AppBar.vue";
+import AppBody from "../components/AppBody.vue";
 import ThemeMixin from "../mixins/ThemeMixin";
 import store from "../store";
 export default {
