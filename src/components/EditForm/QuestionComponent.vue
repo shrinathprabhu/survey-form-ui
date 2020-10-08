@@ -107,7 +107,8 @@
 
 <style scoped>
 .form-title {
-  font-size: 36px;
+  font-size: 28px;
+  font-weight: 500;
 }
 
 .small-tooltip {
