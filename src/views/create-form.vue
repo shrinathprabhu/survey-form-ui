@@ -20,8 +20,10 @@
 </template>
 
 <script>
+import ThemeMixin from "../mixins/theme-mixin";
 export default {
-  name: "CreateForm",
+  name: "create-form",
+  mixins: [ThemeMixin],
   data: () => ({
     loadingDots: ".  ",
   }),

@@ -1,19 +1,19 @@
 <template>
   <v-app>
-    <AppBar />
+    <app-bar />
     <v-main>
-      <AppBody />
+      <app-body />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import AppBar from "../components/AppBar.vue";
-import AppBody from "../components/AppBody.vue";
-import ThemeMixin from "../mixins/ThemeMixin";
+import AppBar from "../components/app-bar.vue";
+import AppBody from "../components/app-body.vue";
+import ThemeMixin from "../mixins/theme-mixin";
 import store from "../store";
 export default {
-  name: "HomePage",
+  name: "home-page",
   components: {
     AppBar,
     AppBody,

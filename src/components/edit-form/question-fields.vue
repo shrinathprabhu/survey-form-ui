@@ -381,10 +381,10 @@
 </style>
 
 <script>
-import ThemeMixin from "../../mixins/ThemeMixin";
+import ThemeMixin from "../../mixins/theme-mixin";
 // import formStore from "../../store/form";
 export default {
-  name: "QuestionFields",
+  name: "question-fields",
   props: ["question", "index", "isLastEl"],
   mixins: [ThemeMixin],
   data: () => ({

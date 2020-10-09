@@ -4,11 +4,11 @@
       <v-container fill-height>
         <v-col justify="center" align="center">
           <v-row justify="center" align="center" class="mt-3 pt-3">
-            <h1 :color="themeColor">Error 404: Page not found</h1>
+            <h1 :color="themeColor">Error 500: Something went wrong</h1>
           </v-row>
           <v-row justify="center" align="center" class="mt-3 pt-3"
-            >Oops. Seems like the page you're trying to access does not
-            exist</v-row
+            >Maybe this is an internal server issue or maybe you're trying to
+            access invalid or inaccessible pages</v-row
           >
         </v-col>
       </v-container>
@@ -17,9 +17,9 @@
 </template>
 
 <script>
-import ThemeMixin from "../mixins/ThemeMixin";
+import ThemeMixin from "../mixins/theme-mixin";
 export default {
-  name: "PageNotFound",
+  name: "something-went-wrong",
   mixins: [ThemeMixin],
   data: () => ({}),
   methods: {},

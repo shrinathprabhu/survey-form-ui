@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import HomePage from '../views/HomePage';
+import HomePage from '../views/home-page.vue';
 import store from '../store';
 
 Vue.use(VueRouter);
@@ -18,27 +18,27 @@ const routes = [
   {
     path: '/forms/create',
     name: 'CreateForm',
-    component: () => import(/* webpackChunkName: "create-form" */ '../views/CreateForm.vue')
+    component: () => import(/* webpackChunkName: "create-form" */ '../views/create-form.vue')
   },
   {
     path: '/forms/:id/edit',
     name: 'EditForm',
-    component: () => import(/* webpackChunkName: "edit-form" */ '../views/EditForm.vue')
+    component: () => import(/* webpackChunkName: "edit-form" */ '../views/edit-form.vue')
   },
   {
     path: '/forms/:id/preview',
     name: 'FormPreview',
-    component: () => import(/* webpackChunkName: "form-preview" */ '../views/FormPreview.vue')
+    component: () => import(/* webpackChunkName: "form-preview" */ '../views/form-preview.vue')
   },
   {
     path: '/404',
     name: 'PageNotFound',
-    component: import(/* webpackChunkName: "page-not-found" */ '../views/PageNotFound.vue')
+    component: import(/* webpackChunkName: "page-not-found" */ '../views/page-not-found.vue')
   },
   {
     path: '/500',
     name: 'SomethingWentWrong',
-    component: import(/* webpackChunkName: "something-went-wrong" */ '../views/SomethingWentWrong.vue')
+    component: import(/* webpackChunkName: "something-went-wrong" */ '../views/something-went-wrong.vue')
   },
   {
     path: '*',

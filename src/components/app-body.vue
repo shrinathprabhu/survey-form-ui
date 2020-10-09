@@ -70,10 +70,10 @@
 </style>
 
 <script>
-import ThemeMixin from "../mixins/ThemeMixin";
+import ThemeMixin from "../mixins/theme-mixin";
 import DB from "../utils/db";
 export default {
-  name: "AppBody",
+  name: "app-body",
   mixins: [ThemeMixin],
   data: () => ({
     forms: [],

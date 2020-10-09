@@ -38,7 +38,7 @@
           :key="index"
           :id="'question' + index"
         >
-          <QuestionFields
+          <question-fields
             :question="question"
             :index="index"
             @remove="removeQuestion"
@@ -118,11 +118,11 @@
 </style>
 
 <script>
-import ThemeMixin from "../../mixins/ThemeMixin";
-import QuestionFields from "./QuestionFields.vue";
+import ThemeMixin from "../../mixins/theme-mixin";
+import QuestionFields from "./question-fields.vue";
 import store from "../../store";
 export default {
-  name: "QuestionComponent",
+  name: "question-component",
   mixins: [ThemeMixin],
   components: { QuestionFields },
   props: ["formDetails"],

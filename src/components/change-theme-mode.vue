@@ -9,7 +9,9 @@
           hide-details
           inset
           :color="themeColor"
-          :label="$vuetify.theme.dark? 'Switch to Light Mode' : 'Switch to Dark Mode'"
+          :label="
+            $vuetify.theme.dark ? 'Switch to Light Mode' : 'Switch to Dark Mode'
+          "
         ></v-switch>
       </v-col>
     </v-row>
@@ -17,9 +19,9 @@
 </template>
 
 <script>
-import ThemeMixin from "../mixins/ThemeMixin";
+import ThemeMixin from "../mixins/theme-mixin";
 export default {
-  name: "ChangeThemeMode",
+  name: "change-theme-mode",
   mixins: [ThemeMixin],
   components: {},
   data: () => ({}),

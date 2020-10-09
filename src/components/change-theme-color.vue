@@ -27,9 +27,9 @@
 </template>
 
 <script>
-import ThemeMixin from "../mixins/ThemeMixin";
+import ThemeMixin from "../mixins/theme-mixin";
 export default {
-  name: "ChangeThemeColor",
+  name: "change-theme-color",
   mixins: [ThemeMixin],
   components: {},
   data: () => ({}),

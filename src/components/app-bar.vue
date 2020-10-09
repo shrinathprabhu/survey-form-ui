@@ -106,9 +106,9 @@
         </v-row>
       </template>
       <v-divider></v-divider>
-      <ChangeThemeColor />
+      <change-theme-color />
       <v-divider></v-divider>
-      <ChangeThemeMode />
+      <change-theme-mode />
     </v-navigation-drawer>
 
     <v-dialog
@@ -132,9 +132,9 @@
           </v-row>
         </template>
         <v-divider></v-divider>
-        <ChangeThemeColor />
+        <change-theme-color />
         <v-divider></v-divider>
-        <ChangeThemeMode />
+        <change-theme-mode />
         <v-card-actions>
           <v-spacer></v-spacer>
 
@@ -158,12 +158,12 @@
 </style>
 
 <script>
-import ThemeMixin from "../mixins/ThemeMixin";
+import ThemeMixin from "../mixins/theme-mixin";
 import store from "../store";
-import ChangeThemeColor from "../components/ChangeThemeColor.vue";
-import ChangeThemeMode from "../components/ChangeThemeMode.vue";
+import ChangeThemeColor from "../components/change-theme-color.vue";
+import ChangeThemeMode from "../components/change-theme-mode.vue";
 export default {
-  name: "AppBar",
+  name: "app-bar",
   mixins: [ThemeMixin],
   components: {
     ChangeThemeColor,

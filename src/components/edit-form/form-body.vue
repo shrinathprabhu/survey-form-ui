@@ -9,24 +9,24 @@
     </v-tabs>
     <v-tabs-items v-model="tab">
       <v-tab-item>
-        <QuestionComponent
+        <question-component
           :formDetails="formDetails"
           @auto-save-state-change="autoSave"
         />
       </v-tab-item>
       <v-tab-item>
-        <ResponsesComponent />
+        <responses-component />
       </v-tab-item>
     </v-tabs-items>
   </v-container>
 </template>
 
 <script>
-import ThemeMixin from "../../mixins/ThemeMixin";
-import QuestionComponent from "./QuestionComponent.vue";
-import ResponsesComponent from "./ResponsesComponent.vue";
+import ThemeMixin from "../../mixins/theme-mixin";
+import QuestionComponent from "./question-component.vue";
+import ResponsesComponent from "./responses-component.vue";
 export default {
-  name: "FormBody",
+  name: "form-body",
   components: { QuestionComponent, ResponsesComponent },
   mixins: [ThemeMixin],
   props: ["formDetails"],

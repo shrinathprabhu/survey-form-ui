@@ -1,10 +1,10 @@
 <template>
   <div v-if="pageNotFound">
-    <PageNotFound />
+    <page-not-found />
   </div>
   <div v-else>
     <v-app>
-      <AppBar
+      <app-bar
         @save="saveForm('click')"
         @publish="publishForm"
         @preview="preview"
@@ -19,7 +19,7 @@
         >
           <div class="text-center">{{ snackbarText }}</div>
         </v-snackbar>
-        <FormBody
+        <form-body
           :formDetails="formDetails"
           @auto-save-state-change="autoSave()"
         />
@@ -31,12 +31,12 @@
 
 <script>
 import { debounce } from "lodash";
-import AppBar from "../components/AppBar.vue";
-import FormBody from "../components/EditForm/FormBody.vue";
-import PageNotFound from "./PageNotFound.vue";
+import AppBar from "../components/app-bar.vue";
+import FormBody from "../components/edit-form/form-body.vue";
+import PageNotFound from "./page-not-found.vue";
 import store from "../store";
 export default {
-  name: "EditForm",
+  name: "edit-form",
   components: {
     AppBar,
     FormBody,
