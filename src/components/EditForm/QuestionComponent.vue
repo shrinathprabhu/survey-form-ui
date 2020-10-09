@@ -14,6 +14,7 @@
               single-line
               hide-details
               @keypress.enter="moveToDescription"
+              maxlength="80"
             ></v-text-field>
           </v-col>
           <v-col class="px-6">
