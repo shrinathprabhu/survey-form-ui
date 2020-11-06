@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import ThemeMixin from "../mixins/theme-mixin";
+import ThemeMixin from "../../mixins/theme-mixin";
 export default {
   name: "change-theme-mode",
   mixins: [ThemeMixin],

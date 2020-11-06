@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { debounce } from "lodash";
+import { debounce, isEqual as arePropertiesSame } from "lodash";
 import AppBar from "../components/app-bar.vue";
 import FormBody from "../components/edit-form/form-body.vue";
 import PageNotFound from "./page-not-found.vue";
@@ -45,6 +45,7 @@ export default {
   },
   data: () => ({
     formDetails: {},
+    formState: {},
     pageNotFound: false,
     dialog: false,
     snackbar: false,
@@ -68,6 +69,7 @@ export default {
       );
       if (response.data && response.data.data && response.data.data.isCreator) {
         this.formDetails = response.data.data;
+        this.formState = JSON.stringify(response.data.data);
         store.commit("changeAppBarTitle", this.formDetails.title);
         store.commit("toggleEdit", true);
       } else {
@@ -75,23 +77,27 @@ export default {
       }
     },
     async saveForm(type) {
-      this.snackbarText =
-        type === "click"
-          ? "Saving the form state..."
-          : "Auto-saving the form state...";
-      this.snackbar = true;
-      this.timeout = 15000;
-      let formId = this.formDetails.id;
-      let response = await this.axios.put(
-        `${process.env.VUE_APP_BASE_URL}/forms/${formId}/save`,
-        this.formDetails
-      );
-      if (response.data && response.data.data) {
-        this.snackbarText = "Form state saved";
-      } else {
-        this.snackbarText = "Failed to save the form state";
+      let formState = JSON.parse(this.formState);
+      if (!arePropertiesSame(this.formDetails, formState)) {
+        this.snackbarText =
+          type === "click"
+            ? "Saving the form state..."
+            : "Auto-saving the form state...";
+        this.snackbar = true;
+        this.timeout = 15000;
+        let formId = this.formDetails.id;
+        let response = await this.axios.put(
+          `${process.env.VUE_APP_BASE_URL}/forms/${formId}/save`,
+          this.formDetails
+        );
+        if (response.data && response.data.data) {
+          this.snackbarText = "Form state saved";
+        } else {
+          this.snackbarText = "Failed to save the form state";
+        }
+        this.formState = JSON.stringify(this.formDetails);
+        this.timeout = 2000;
       }
-      this.timeout = 2000;
     },
     async publishForm() {
       this.snackbarText = "Publishing form to the web...";
