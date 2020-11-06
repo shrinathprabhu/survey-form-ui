@@ -14,6 +14,8 @@
           v-model="snackbar"
           :timeout="timeout"
           top
+          dark
+          :color="snackbarColor"
           rounded="pill"
           transition="v-fade-transition"
         >
@@ -35,6 +37,7 @@ import AppBar from "../components/app-bar.vue";
 import FormBody from "../components/edit-form/form-body.vue";
 import PageNotFound from "./page-not-found.vue";
 import store from "../store";
+import ThemeMixin from "../mixins/theme-mixin";
 export default {
   name: "edit-form",
   components: {
@@ -43,6 +46,7 @@ export default {
     // QuestionComponent,
     PageNotFound,
   },
+  mixins: [ThemeMixin],
   data: () => ({
     formDetails: {},
     formState: {},
@@ -51,6 +55,7 @@ export default {
     snackbar: false,
     timeout: -1,
     snackbarText: "",
+    snackbarColor: "",
   }),
   created: async function () {
     await this.fetchForm();
@@ -83,6 +88,7 @@ export default {
           type === "click"
             ? "Saving the form state..."
             : "Auto-saving the form state...";
+        this.snackbarColor = this.themeColor;
         this.snackbar = true;
         this.timeout = 15000;
         let formId = this.formDetails.id;
@@ -91,19 +97,30 @@ export default {
           this.formDetails
         );
         if (response.data && response.data.data) {
+          this.snackbarColor = "success";
           this.snackbarText = "Form state saved";
         } else {
+          this.snackbarColor = "error";
           this.snackbarText = "Failed to save the form state";
         }
         this.formState = JSON.stringify(this.formDetails);
         this.timeout = 2000;
+      } else {
+        if (type === "click") {
+          this.snackbarColor = this.themeColor;
+          this.snackbarText = "No changes detected";
+          this.snackbar = true;
+          this.timeout = 2000;
+        }
       }
     },
     async publishForm() {
+      this.snackbarColor = this.themeColor;
       this.snackbarText = "Publishing form to the web...";
       this.snackbar = true;
       this.timeout = 15000;
       setTimeout(() => {
+        this.snackbarColor = "success";
         this.snackbarText = "Form published";
         this.timeout = 2000;
       }, 2000);
