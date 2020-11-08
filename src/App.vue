@@ -24,7 +24,14 @@ export default {
   }),
   methods: {},
   computed: {},
-  mounted: function () {
+  beforeCreate() {
+    if (!/localhost:/.test(window.location.host)) {
+      if (window.location.protocol === "http:") {
+        window.location.href = "https://" + window.location.host;
+      }
+    }
+  },
+  mounted() {
     window.addEventListener("offline", function () {
       this.offline = true;
     });

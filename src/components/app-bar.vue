@@ -1,23 +1,16 @@
 <template>
   <div>
-    <v-app-bar
-      shrink-on-scroll
-      prominent
-      app
-      fixed
-      v-bind:color="themeColor"
-      dark
-    >
+    <v-app-bar app fixed v-bind:color="themeColor" dark>
       <v-img
         src="../assets/logo.png"
         max-height="35"
         max-width="35"
-        class="mt-2 mr-2"
+        class="mr-2"
         contain
         style="cursor: pointer"
         @click.stop="navigateToHome"
       ></v-img>
-      <v-toolbar-title>{{ appBarTitle }}</v-toolbar-title>
+      <v-toolbar-title class="mt-2">{{ appBarTitle }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-tooltip content-class="small-tooltip" v-if="canEdit" bottom>
         <template v-slot:activator="{ on, attrs }">
@@ -67,7 +60,7 @@
         </template>
         <span>Publish form</span>
       </v-tooltip>
-      <v-tooltip content-class="small-tooltip" bottom>
+      <v-tooltip content-class="small-tooltip" bottom v-if="showThemeButton">
         <template v-slot:activator="{ on, attrs }">
           <v-app-bar-nav-icon>
             <v-btn
@@ -85,7 +78,7 @@
       </v-tooltip>
     </v-app-bar>
     <v-navigation-drawer
-      v-if="!$vuetify.breakpoint.mobile"
+      v-if="!$vuetify.breakpoint.mobile && showThemeButton"
       fixed
       temporary
       right
@@ -112,7 +105,7 @@
     </v-navigation-drawer>
 
     <v-dialog
-      v-if="$vuetify.breakpoint.mobile"
+      v-if="$vuetify.breakpoint.mobile && showThemeButton"
       v-model="changeTheme"
       max-width="290"
     >
@@ -165,6 +158,7 @@ import ChangeThemeMode from "../components/theme/change-theme-mode.vue";
 export default {
   name: "app-bar",
   mixins: [ThemeMixin],
+  props: ["title", "prominent", "hideThemeChanger"],
   components: {
     ChangeThemeColor,
     ChangeThemeMode,
@@ -180,10 +174,16 @@ export default {
   },
   computed: {
     appBarTitle() {
-      return store.state.appBarTitle;
+      return this.title || store.state.appBarTitle;
     },
     canEdit() {
       return store.state.canEdit;
+    },
+    isProminent() {
+      return this.prominent === false ? false : true;
+    },
+    showThemeButton() {
+      return !this.hideThemeChanger;
     },
   },
 };

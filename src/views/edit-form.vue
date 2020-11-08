@@ -126,7 +126,12 @@ export default {
       }, 2000);
       console.log("Form details", this.formDetails);
     },
-    preview() {},
+    preview() {
+      let routeData = this.$router.resolve({
+        name: "FormPreview",
+      });
+      window.open(routeData.href, "_blank");
+    },
   },
   watch: {},
 };
