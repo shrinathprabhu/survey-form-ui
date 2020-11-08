@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar app fixed v-bind:color="themeColor" dark>
+    <v-app-bar app fixed v-bind:color="themeColor" dark flat>
       <v-img
         src="../assets/logo.png"
         max-height="35"
