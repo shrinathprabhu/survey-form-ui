@@ -2,7 +2,13 @@
   <v-container fluid>
     <v-col class="custom-container">
       <v-row>
-        <v-card shaped class="form-card" to="/forms/create" elevation="5">
+        <v-card
+          shaped
+          class="form-card"
+          to="/forms/create"
+          elevation="5"
+          outlined
+        >
           <v-row align="center" justify="center" style="height: 205px">
             <v-col>
               <v-row align="center" justify="center">
