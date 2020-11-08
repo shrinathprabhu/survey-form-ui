@@ -39,9 +39,9 @@ export default {
     }, 1000);
     try {
       let responseData = await this.createForm();
-      this.$router.push(`/forms/${responseData.id}/edit`);
+      this.$router.replace(`/forms/${responseData.id}/edit`);
     } catch (e) {
-      this.$router.push("/500");
+      this.$router.replace("/500");
     }
     clearInterval(loader);
   },
