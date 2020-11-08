@@ -5,27 +5,24 @@
         <v-card shaped elevation="2" outlined class="pb-5 mb-5">
           <v-col class="px-6">
             <v-text-field
-              flat
               v-model="formDetails.title"
               :color="themeColor"
               height="50"
               :loading="fieldsLoading"
               class="form-title"
-              single-line
-              hide-details
+              label="Form title"
               @keypress.enter="moveToDescription"
               maxlength="80"
+              outlined
             ></v-text-field>
           </v-col>
           <v-col class="px-6">
             <v-text-field
-              flat
               v-model="formDetails.description"
               :color="themeColor"
-              placeholder="Description"
+              label="Description"
               :loading="fieldsLoading"
-              single-line
-              hide-details
+              outlined
               ref="description"
             ></v-text-field>
           </v-col>

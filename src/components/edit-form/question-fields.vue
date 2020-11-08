@@ -7,16 +7,20 @@
           flat
           :color="themeColor"
           v-model="question.question"
-          placeholder="Question"
+          label="Question"
+          dense
+          outlined
         ></v-text-field>
       </v-col>
       <v-col cols="6" md="3" class="py-0">
         <v-select
           :color="themeColor"
-          placeholder="Answer Type"
+          label="Answer Type"
           v-model="question.answerType"
           :items="answerTypes"
           cache-items
+          dense
+          outlined
           :item-color="themeColor"
         >
           <template v-slot:selection="data">
@@ -40,16 +44,20 @@
           flat
           :color="themeColor"
           v-model="question.question"
-          placeholder="Question"
+          label="Question"
+          dense
+          outlined
         ></v-text-field>
       </v-row>
       <v-row>
         <v-select
           :color="themeColor"
-          placeholder="Answer Type"
+          label="Answer Type"
           v-model="question.answerType"
           :items="answerTypes"
           cache-items
+          dense
+          outlined
           :item-color="themeColor"
         >
           <template v-slot:selection="data">
@@ -75,7 +83,9 @@
         flat
         :color="themeColor"
         v-model="question.description"
-        placeholder="Description"
+        dense
+        outlined
+        label="Description"
       ></v-text-field>
     </v-row>
     <v-row :class="$vuetify.breakpoint.mobile ? 'px-2' : 'px-5'">
@@ -84,14 +94,21 @@
         class="py-0"
         v-if="question.answerType === 'Short answer'"
       >
-        <v-text-field placeholder="Short answer" disabled></v-text-field>
+        <v-text-field
+          placeholder="Short answer"
+          dense
+          outlined
+          disabled
+        ></v-text-field>
       </v-col>
       <v-col cols="12" class="py-0" v-if="question.answerType === 'Paragraph'">
         <v-textarea
           placeholder="Paragraph"
           disabled
           no-resize
-          rows="2"
+          outlined
+          dense
+          rows="4"
         ></v-textarea>
       </v-col>
       <v-col
@@ -205,6 +222,8 @@
               hint="Lower Limit"
               v-model="range.lowerLimit"
               type="number"
+              dense
+              outlined
             ></v-text-field>
           </v-col>
           <v-col cols="4" sm="3" md="2">
@@ -215,6 +234,8 @@
               hint="Upper Limit"
               v-model="range.upperLimit"
               type="number"
+              dense
+              outlined
             ></v-text-field>
           </v-col>
           <v-col cols="4" sm="3" md="2">
@@ -225,6 +246,8 @@
               hint="Number of steps"
               v-model="range.numberOfSteps"
               type="number"
+              dense
+              outlined
             ></v-text-field>
           </v-col>
           <v-col>
@@ -232,6 +255,9 @@
               :color="themeColor"
               v-model="range.single"
               label="Switch to single mode"
+              dense
+              inset
+              class="mt-2"
             ></v-switch>
           </v-col>
         </v-row>
@@ -247,6 +273,7 @@
             :min="range.lowerLimit"
             :max="range.upperLimit"
             :step="range.numberOfSteps"
+            dense
             v-if="range.single"
           ></v-slider>
           <v-range-slider
@@ -256,6 +283,7 @@
             :min="range.lowerLimit"
             :max="range.upperLimit"
             :step="range.numberOfSteps"
+            dense
             v-else
           ></v-range-slider>
         </v-layout>
@@ -269,7 +297,8 @@
           disabled
           label="Month, day, year"
           append-icon="mdi-calendar"
-          readonly
+          dense
+          outlined
         ></v-text-field>
       </v-col>
       <v-col
@@ -281,7 +310,8 @@
           disabled
           label="Time"
           append-icon="mdi-timer"
-          readonly
+          dense
+          outlined
         ></v-text-field>
       </v-col>
     </v-row>
@@ -296,6 +326,8 @@
         label="Description"
         class="mr-5"
         aria-label="Enable Description"
+        inset
+        dense
       ></v-switch>
       <v-switch
         :color="themeColor"
@@ -303,6 +335,8 @@
         label="Required"
         class="mr-5"
         aria-label="Make this field required"
+        inset
+        dense
       ></v-switch>
       <!-- <v-switch
         v-if="['Short answer', 'Paragraph'].includes(question.answerType)"
@@ -310,6 +344,8 @@
         v-model="validate"
         label="Add Validation"
         aria-label="Add Validation to this field"
+        inset
+        dense
       ></v-switch> -->
       <v-menu top close-on-click close-on-content-click>
         <template v-slot:activator="{ on, attrs }">

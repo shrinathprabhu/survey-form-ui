@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="justify-center">
       <v-col>
-        <v-card elevation="3" :rounded="false">
+        <v-card flat :rounded="false">
           <v-card
             class="px-5 py-3"
             :color="themeColor"
@@ -15,6 +15,7 @@
           <v-card
             class="px-5 py-3"
             flat
+            outlined
             style="border-top-left-radius: 0; border-top-right-radius: 0"
             v-if="form.description"
           >

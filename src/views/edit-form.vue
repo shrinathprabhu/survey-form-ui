@@ -92,6 +92,7 @@ export default {
         this.snackbar = true;
         this.timeout = 15000;
         let formId = this.formDetails.id;
+        this.formDetails.title = this.formDetails.title || "Untitled form";
         let response = await this.axios.put(
           `${process.env.VUE_APP_BASE_URL}/forms/${formId}/save`,
           this.formDetails
