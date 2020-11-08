@@ -19,7 +19,7 @@ export default new Vuex.Store({
       },
       {
         name: "Purple",
-        value: "purple darken-4",
+        value: "purple darken-1",
       },
       {
         name: "Pink",
@@ -42,7 +42,7 @@ export default new Vuex.Store({
         value: "blue darken-1",
       },
       {
-        name: "Dark Lime",
+        name: "Lime",
         value: "lime darken-3",
       },
       {
@@ -51,27 +51,27 @@ export default new Vuex.Store({
       },
       {
         name: "Orange",
-        value: "orange darken-1",
+        value: "orange darken-3",
       },
       {
         name: "Deep Orange",
-        value: "deep-orange",
+        value: "deep-orange darken-2",
       },
       {
         name: "Brown",
         value: "brown darken-2",
       },
       {
-        name: "Grey",
+        name: "Blue Grey",
         value: "blue-grey",
       },
       {
-        name: "Dark Grey",
+        name: "Grey",
         value: "grey darken-3",
       },
       {
-        name: "Dark Yellow",
-        value: "yellow darken-2",
+        name: "Dark Pink",
+        value: "pink darken-3",
       },
     ],
     appBarTitle: "",

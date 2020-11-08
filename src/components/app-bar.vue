@@ -163,10 +163,14 @@ export default {
     ChangeThemeColor,
     ChangeThemeMode,
   },
-  data: () => ({}),
+  data: () => ({
+    changeTheme: false,
+  }),
   methods: {
     navigateToHome() {
-      this.$router.push("/");
+      if (window.location.pathname !== "/forms") {
+        this.$router.push("/");
+      }
     },
     emitState(type) {
       this.$emit(type);
