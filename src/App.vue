@@ -27,7 +27,7 @@ export default {
   beforeCreate() {
     if (!/localhost:/.test(window.location.host)) {
       if (window.location.protocol === "http:") {
-        window.location.href = "https://" + window.location.host;
+        window.location.replace("https://" + window.location.host);
       }
     }
   },
