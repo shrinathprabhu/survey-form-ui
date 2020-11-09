@@ -1,6 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Dashboard from "../views/dashboard.vue";
+import PageNotFound from "../views/page-not-found.vue";
+import SomethingWentWrong from "../views/something-went-wrong.vue";
 import store from "../store";
 
 Vue.use(VueRouter);
@@ -38,16 +40,12 @@ const routes = [
   {
     path: "/404",
     name: "PageNotFound",
-    component: import(
-      /* webpackChunkName: "page-not-found" */ "../views/page-not-found.vue"
-    ),
+    component: PageNotFound,
   },
   {
     path: "/500",
     name: "SomethingWentWrong",
-    component: import(
-      /* webpackChunkName: "something-went-wrong" */ "../views/something-went-wrong.vue"
-    ),
+    component: SomethingWentWrong,
   },
   {
     path: "*",
