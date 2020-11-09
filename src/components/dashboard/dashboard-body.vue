@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-col class="custom-container">
-      <v-row class="justify-center">
+      <v-row>
         <v-card
           shaped
           class="form-card"
@@ -62,7 +62,7 @@
 }
 @media only screen and (max-width: 600px) {
   .form-card {
-    margin: 20px 0px 20px 30px;
+    margin: 20px 0px 20px 20px;
     width: 150px;
     height: 205px;
     cursor: pointer;

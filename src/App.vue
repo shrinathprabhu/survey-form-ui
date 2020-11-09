@@ -25,7 +25,7 @@ export default {
   methods: {},
   computed: {},
   beforeCreate() {
-    if (!/localhost:/.test(window.location.host)) {
+    if (!/localhost:|192.168.[0-255].[0-255]:/.test(window.location.host)) {
       if (window.location.protocol === "http:") {
         window.location.replace("https://" + window.location.host);
       }
