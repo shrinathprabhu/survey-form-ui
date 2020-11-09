@@ -2,8 +2,8 @@
   <v-container>
     <v-row>
       <v-col class="mr-1">
-        <v-card shaped elevation="2" outlined class="pb-5 mb-5">
-          <v-col class="px-6">
+        <v-card shaped elevation="2" outlined class="pb-n2 mb-5">
+          <v-col class="px-6 pb-0 mt-8">
             <v-text-field
               v-model="formDetails.title"
               :color="themeColor"
@@ -15,8 +15,8 @@
               maxlength="80"
               outlined
             ></v-text-field>
-          </v-col>
-          <v-col class="px-6">
+            <!-- </v-col> -->
+            <!-- <v-col class="px-6"> -->
             <v-text-field
               v-model="formDetails.description"
               :color="themeColor"
@@ -48,7 +48,12 @@
         </v-card>
       </v-col>
       <!-- <v-layout row wrap> -->
-      <v-card elevation="3" style="position: fixed; top: 210px; right: 10px">
+      <v-card
+        elevation="3"
+        style="position: fixed; top: 210px; right: 10px"
+        dark
+        :color="themeColor"
+      >
         <v-col class="px-5">
           <v-row class="py-1">
             <v-tooltip bottom content-class="small-tooltip">

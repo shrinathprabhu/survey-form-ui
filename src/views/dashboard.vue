@@ -2,21 +2,21 @@
   <v-app>
     <app-bar />
     <v-main>
-      <app-body />
+      <dashboard-body />
     </v-main>
   </v-app>
 </template>
 
 <script>
 import AppBar from "../components/app-bar.vue";
-import AppBody from "../components/app-body.vue";
+import DashboardBody from "../components/dashboard/dashboard-body.vue";
 import ThemeMixin from "../mixins/theme-mixin";
 import store from "../store";
 export default {
   name: "home-page",
   components: {
     AppBar,
-    AppBody,
+    DashboardBody,
   },
   mixins: [ThemeMixin],
   data: () => ({}),

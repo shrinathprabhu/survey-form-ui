@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-col class="custom-container">
-      <v-row>
+      <v-row class="justify-center">
         <v-card
           shaped
           class="form-card"
@@ -76,10 +76,10 @@
 </style>
 
 <script>
-import ThemeMixin from "../mixins/theme-mixin";
-import DB from "../utils/db";
+import ThemeMixin from "../../mixins/theme-mixin";
+import DB from "../../utils/db";
 export default {
-  name: "app-body",
+  name: "dashboard-body",
   mixins: [ThemeMixin],
   data: () => ({
     forms: [],

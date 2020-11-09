@@ -2,7 +2,7 @@
   <div v-if="pageNotFound">
     <page-not-found />
   </div>
-  <div v-else>
+  <div v-else @keydown.ctrl.83.prevent="saveForm('click')">
     <v-app>
       <app-bar
         @save="saveForm('click')"
