@@ -110,8 +110,8 @@
       max-width="290"
     >
       <v-card>
-        <template v-slot:prepend>
-          <v-row class="my-3 mx-3">
+        <v-card-title>
+          <v-row>
             <v-icon v-bind:color="themeColor">mdi-palette-outline</v-icon>
             <v-col>Theme Options</v-col>
             <v-btn
@@ -123,7 +123,7 @@
               <v-icon>mdi-window-close</v-icon>
             </v-btn>
           </v-row>
-        </template>
+        </v-card-title>
         <v-divider></v-divider>
         <change-theme-color />
         <v-divider></v-divider>
