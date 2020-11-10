@@ -12,6 +12,8 @@
   </div>
 </template>
 
+<style scoped src="@/assets/styles/light-background-color-fix.css"></style>
+
 <script>
 import PageNotFound from "./page-not-found.vue";
 import store from "../store";

@@ -31,6 +31,8 @@
   </div>
 </template>
 
+<style scoped src="@/assets/styles/light-background-color-fix.css"></style>
+
 <script>
 import { debounce, isEqual as arePropertiesSame } from "lodash";
 import AppBar from "../components/app-bar.vue";

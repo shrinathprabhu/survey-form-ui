@@ -19,6 +19,8 @@
   </v-app>
 </template>
 
+<style scoped src="@/assets/styles/light-background-color-fix.css"></style>
+
 <script>
 import ThemeMixin from "../mixins/theme-mixin";
 export default {

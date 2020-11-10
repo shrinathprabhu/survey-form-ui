@@ -7,6 +7,8 @@
   </v-app>
 </template>
 
+<style scoped src="@/assets/styles/light-background-color-fix.css"></style>
+
 <script>
 import AppBar from "../components/app-bar.vue";
 import DashboardBody from "../components/dashboard/dashboard-body.vue";
