@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <app-bar />
+    <app-bar page="dashboard" />
     <v-main>
       <dashboard-body />
     </v-main>

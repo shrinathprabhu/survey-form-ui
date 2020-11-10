@@ -12,7 +12,39 @@
       ></v-img>
       <v-toolbar-title class="mt-2">{{ appBarTitle }}</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-tooltip content-class="small-tooltip" v-if="canEdit" bottom>
+      <v-tooltip
+        content-class="small-tooltip"
+        v-if="page === 'dashboard'"
+        bottom
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <span v-bind="attrs" v-on="on">
+            <v-app-bar-nav-icon>
+              <v-btn icon disabled aria-label="Transfer data to other device">
+                <v-icon>mdi-sync</v-icon>
+              </v-btn>
+            </v-app-bar-nav-icon>
+          </span>
+        </template>
+        <span>Transfer data (Coming soon)</span>
+      </v-tooltip>
+      <v-tooltip
+        content-class="small-tooltip"
+        v-if="page === 'dashboard'"
+        bottom
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <span v-bind="attrs" v-on="on">
+            <v-app-bar-nav-icon>
+              <v-btn icon disabled aria-label="Check notification">
+                <v-icon>mdi-bell</v-icon>
+              </v-btn>
+            </v-app-bar-nav-icon>
+          </span>
+        </template>
+        <span>Notifications (Coming soon)</span>
+      </v-tooltip>
+      <v-tooltip content-class="small-tooltip" v-if="page === 'edit'" bottom>
         <template v-slot:activator="{ on, attrs }">
           <v-app-bar-nav-icon>
             <v-btn
@@ -26,9 +58,9 @@
             </v-btn>
           </v-app-bar-nav-icon>
         </template>
-        <span>Preview</span>
+        <span>Preview (Work in progress)</span>
       </v-tooltip>
-      <v-tooltip content-class="small-tooltip" v-if="canEdit" bottom>
+      <v-tooltip content-class="small-tooltip" v-if="page === 'edit'" bottom>
         <template v-slot:activator="{ on, attrs }">
           <v-app-bar-nav-icon>
             <v-btn
@@ -44,21 +76,22 @@
         </template>
         <span>Save changes</span>
       </v-tooltip>
-      <v-tooltip content-class="small-tooltip" v-if="canEdit" bottom>
+      <v-tooltip content-class="small-tooltip" v-if="page === 'edit'" bottom>
         <template v-slot:activator="{ on, attrs }">
-          <v-app-bar-nav-icon>
-            <v-btn
-              icon
-              v-bind="attrs"
-              v-on="on"
-              @click.stop="emitState('publish')"
-              aria-label="Publish form to the web"
-            >
-              <v-icon>mdi-publish</v-icon>
-            </v-btn>
-          </v-app-bar-nav-icon>
+          <span v-bind="attrs" v-on="on">
+            <v-app-bar-nav-icon>
+              <v-btn
+                icon
+                disabled
+                @click.stop="emitState('publish')"
+                aria-label="Publish form to the web"
+              >
+                <v-icon>mdi-publish</v-icon>
+              </v-btn>
+            </v-app-bar-nav-icon>
+          </span>
         </template>
-        <span>Publish form</span>
+        <span>Publish form (Coming soon)</span>
       </v-tooltip>
       <v-tooltip content-class="small-tooltip" bottom v-if="showThemeButton">
         <template v-slot:activator="{ on, attrs }">
@@ -158,7 +191,7 @@ import ChangeThemeMode from "../components/theme/change-theme-mode.vue";
 export default {
   name: "app-bar",
   mixins: [ThemeMixin],
-  props: ["title", "prominent", "hideThemeChanger"],
+  props: ["title", "prominent", "hideThemeChanger", "page"],
   components: {
     ChangeThemeColor,
     ChangeThemeMode,

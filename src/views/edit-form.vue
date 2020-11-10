@@ -5,6 +5,7 @@
   <div v-else @keydown.ctrl.83.prevent="saveForm('click')">
     <v-app>
       <app-bar
+        page="edit"
         @save="saveForm('click')"
         @publish="publishForm"
         @preview="preview"
@@ -118,16 +119,10 @@ export default {
       }
     },
     async publishForm() {
-      this.snackbarColor = this.themeColor;
-      this.snackbarText = "Publishing form to the web...";
+      this.snackbarColor = "error";
+      this.snackbarText = "Publishing form is not supported yet.";
       this.snackbar = true;
-      this.timeout = 15000;
-      setTimeout(() => {
-        this.snackbarColor = "success";
-        this.snackbarText = "Form published";
-        this.timeout = 2000;
-      }, 2000);
-      console.log("Form details", this.formDetails);
+      this.timeout = 2000;
     },
     preview() {
       let routeData = this.$router.resolve({

@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col class="mr-1">
-        <v-card shaped elevation="2" outlined class="pb-n2 mb-5">
+        <v-card shaped elevation="1" outlined class="pb-n2 mb-5">
           <v-col class="px-6 pb-0 mt-8">
             <v-text-field
               v-model="formDetails.title"
@@ -28,9 +28,9 @@
           </v-col>
         </v-card>
         <v-card
-          elevation="2"
+          elevation="1"
           outlined
-          class="mt-3 mb-3"
+          class="mb-5 pt-3"
           v-for="(question, index) in formDetails.questionnaires"
           :key="index"
           :id="'question' + index"
@@ -74,31 +74,40 @@
           <v-row class="py-1">
             <v-tooltip bottom content-class="small-tooltip">
               <template v-slot:activator="{ on, attrs }">
-                <v-btn v-bind="attrs" v-on="on" icon elevation="0">
-                  <v-icon>mdi-format-page-break</v-icon>
-                </v-btn>
+                <!--FIXME remove this span when enabling this button -->
+                <span v-bind="attrs" v-on="on">
+                  <v-btn disabled icon elevation="0">
+                    <v-icon>mdi-format-page-break</v-icon>
+                  </v-btn>
+                </span>
               </template>
-              <span>Add new section</span>
+              <span>Add new section (Coming soon)</span>
             </v-tooltip>
           </v-row>
           <v-row class="py-1">
             <v-tooltip bottom content-class="small-tooltip">
               <template v-slot:activator="{ on, attrs }">
-                <v-btn v-bind="attrs" v-on="on" icon elevation="0">
-                  <v-icon>mdi-cogs</v-icon>
-                </v-btn>
+                <!--FIXME remove this span when enabling this button -->
+                <span v-bind="attrs" v-on="on">
+                  <v-btn disabled icon elevation="0">
+                    <v-icon>mdi-cogs</v-icon>
+                  </v-btn>
+                </span>
               </template>
-              <span>Form settings</span>
+              <span>Form settings (Coming Soon)</span>
             </v-tooltip>
           </v-row>
           <v-row class="py-1">
             <v-tooltip bottom content-class="small-tooltip">
               <template v-slot:activator="{ on, attrs }">
-                <v-btn v-bind="attrs" v-on="on" icon elevation="0">
-                  <v-icon>mdi-export-variant</v-icon>
-                </v-btn>
+                <!--FIXME remove this span when enabling this button -->
+                <span v-bind="attrs" v-on="on">
+                  <v-btn disabled icon elevation="0">
+                    <v-icon>mdi-export-variant</v-icon>
+                  </v-btn>
+                </span>
               </template>
-              <span>Export as JSON</span>
+              <span>Export as JSON (Coming Soon)</span>
             </v-tooltip>
           </v-row>
         </v-col>
