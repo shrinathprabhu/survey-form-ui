@@ -17,13 +17,18 @@
       </v-container>
     </v-main>
   </v-app>
+  <!-- <vue-qrcode value="https://openforms.herokuapp.com" width="640" /> -->
 </template>
 
 <script>
 import ThemeMixin from "../mixins/theme-mixin";
+import VueQrcode from "vue-qrcode";
 export default {
   name: "something-went-wrong",
   mixins: [ThemeMixin],
+  components: {
+    VueQrcode,
+  },
   mounted() {
     document.title = "Error 500 - Something went wrong";
   },
